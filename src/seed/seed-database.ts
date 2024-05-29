@@ -1,26 +1,53 @@
 import { initialData } from "./seed";
-import prisma from "../lib/prisma"
+import prisma from "../lib/prisma";
 
 const main = async () => {
     // console.log(initialData);
 
     // 1. Elininar registros
-    await Promise.all([
-        prisma.productImage.deleteMany(),
-        prisma.product.deleteMany(),
-        prisma.category.deleteMany(),
-    ]
-    )
+    await prisma.productImage.deleteMany();
+    await prisma.product.deleteMany();
+    await prisma.category.deleteMany();
 
     // 2. Insertar catagorías
-    const {categories} = initialData
-    const categoriesData = categories.map((name) => ({name}))
-    console.log(categoriesData)
-    await prisma.category.createMany({
-        data: categoriesData
-    })
+    const { categories, products } = initialData;
+    const categoriesData = categories.map((name) => ({ name }));
 
-    console.log('Seed ejecutado correctamente');
+    await prisma.category.createMany({
+        data: categoriesData,
+    });
+
+    // 3. Obtener id de las categoras insertadas para posterior relacioón con productos
+    const categoriesDB = await prisma.category.findMany();
+    const categoriesMap = categoriesDB.reduce((accum, current) => {
+        accum[current.name.toLowerCase()] = current.id;
+        return accum;
+    }, {} as Record<string, string>);
+
+    // 4. Insertar productos
+
+    products.forEach(async (product) => {
+        const { type, inStock, images, ...rest } = product;
+        const newProduct = await prisma.product.create({
+            data: {
+                ...rest,
+                in_stock: inStock,
+                category_id: categoriesMap[type],
+            },
+        });
+
+        // 4.1 Insertar imagenes
+        const imnagesData = images.map((image) => ({
+            url: image,
+            product_id: newProduct.id
+        }))
+
+        await prisma.productImage.createMany({
+            data: imnagesData
+        })
+    });
+
+    console.log("Seed ejecutado correctamente");
 };
 
 (() => {
