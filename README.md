@@ -29,7 +29,13 @@ pnpm add clsx
     ```bash
     sudo docker compose up -d
 
-5. Correr proyecto
+5. Correr las migraciones de prisma
+
+    ```bash
+    pnpm exec prisma migrate dev
+    ```
+
+6. Correr proyecto
 
     ```bash
     pnpm run dev
