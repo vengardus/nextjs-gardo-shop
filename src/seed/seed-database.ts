@@ -1,11 +1,17 @@
 import { initialData } from "./seed";
-
-interface abc {
-    x: number;
-}
+import prisma from "../lib/prisma"
 
 const main = async () => {
-    console.log(initialData);
+    // console.log(initialData);
+
+    await Promise.all([
+        prisma.productImage.deleteMany(),
+        prisma.product.deleteMany(),
+        prisma.category.deleteMany(),
+    ]
+    )
+
+    console.log('Seed ejecutado correctamente');
 };
 
 (() => {
