@@ -9,13 +9,17 @@ interface IPaginationOptions {
 }
 
 export const getPaginatedProductsWithImages = async ({
-    page=1,
-    take=10,
+    page = 1,
+    take = 10,
 }: IPaginationOptions): Promise<{
     products: IProduct[];
+    currentPage: number;
+    totalPages: number;
 }> => {
+    // 1. Validar page y take
     if (page < 1) page = 1;
 
+    // 2. Obtener productos
     const productsDB = await prisma.product.findMany({
         take: take,
         skip: (page - 1) * take,
@@ -29,13 +33,20 @@ export const getPaginatedProductsWithImages = async ({
         },
     });
 
-    const products = {
-        products: productsDB.map((product) => ({
-            ...product,
-            images: product.ProductImage.map((image) => image.url),
-            inStock: product.in_stock,
-        })),
-    };
+    // 3. mapper prodctosDB a tipo IProduct[]
+    const products = productsDB.map((product) => ({
+        ...product,
+        images: product.ProductImage.map((image) => image.url),
+        inStock: product.in_stock,
+    }));
 
-    return products;
+    // 4. Obtener datos de paginación
+    const productCount = await prisma.product.count({});
+    const totalPages = Math.ceil(productCount / take);
+
+    return {
+        products,
+        currentPage: page,
+        totalPages,
+    };
 };

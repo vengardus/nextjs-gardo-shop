@@ -13,7 +13,9 @@ interface Props {
 
 export default async function HomePage({ searchParams }: Props) {
     const page = isNaN(Number(searchParams.page)) ? 1 : Number(searchParams.page)
-    const { products } = await getPaginatedProductsWithImages({ page })
+    const { products, currentPage, totalPages } = await getPaginatedProductsWithImages({ page })
+
+    console.log(currentPage, totalPages)
 
     if (!products.length) redirect('/')
 
