@@ -1,4 +1,4 @@
-import { getProductBySlug } from '@/actions/products/products.action'
+import { getProductBySlug } from '@/actions/product/product.action'
 import { ProductTemplate } from '@/components/templates/product/ProductTemplate'
 import { notFound } from 'next/navigation'
 

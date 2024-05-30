@@ -1,11 +1,11 @@
-import { Product } from "@/interfaces/product.interface"
+import { type IProduct } from "@/interfaces/product.interface"
 import { ProductsGrid } from "@/components/products/products-grid/ProductsGrid"
 import { Title } from "@/components/ui/title/Title"
 import { Category } from "@/seed/seed"
 import { labelCategory } from "@/config/configApp"
 
 interface Props {
-  products: Product[],
+  products: IProduct[],
   category?: Category
 }
 

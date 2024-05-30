@@ -1,4 +1,4 @@
-export interface Product {
+export interface IProduct {
     // id:number
     description: string;
     images: string[];
@@ -8,7 +8,7 @@ export interface Product {
     slug: string;
     tags: string[];
     title: string;
-    type: ValidTypes;
+    //Todo:  type: ValidTypes;
     gender: 'men'|'women'|'kid'|'unisex'
 }
 

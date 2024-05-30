@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { getAllProductsByCategory } from "@/actions/products/products.action"
+import { getAllProductsByCategory } from "@/actions/product/product.action"
 import { HomeTemplate } from "@/components/templates/home/HomeTemplate"
 import { Category } from "@/seed/seed"
 import { isValidCategory } from "@/libs/isCategoryValid"
