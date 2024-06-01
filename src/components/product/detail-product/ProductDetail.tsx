@@ -1,16 +1,20 @@
-import { ISeedProduct } from "@/seed/seed"
 import { SizeSelector } from "../size-selector/SizeSelector"
 import { QuantitySelector } from "../quantity-selector/QuantitySelector"
 import { titleFont } from "@/config/fonts"
+import { IProduct } from "@/interfaces/product.interface"
+import { StockLabel } from "../stock-label/StockLabel"
 
 
 interface Props {
-    product: ISeedProduct,
+    product: IProduct,
 }
 
 export const ProductDetail = ({ product }: Props) => {
     return (
         <>
+            {/* stock */}
+           <StockLabel slug={product.slug}/>
+
             {/* title */}
             <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
                 {product.title}

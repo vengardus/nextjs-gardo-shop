@@ -1,10 +1,10 @@
 import { ProductDetail } from "@/components/product/detail-product/ProductDetail"
 import { ProductMobileSlideShow } from "@/components/product/slide-show/ProductMobileSlideShow"
 import { ProductSlideShow } from "@/components/product/slide-show/ProductSlideShow"
-import { ISeedProduct } from "@/seed/seed"
+import { IProduct } from "@/interfaces/product.interface"
 
 interface Props {
-  product: ISeedProduct,
+  product: IProduct,
 }
 
 export const ProductTemplate = ({ product }: Props) => {

@@ -35,7 +35,13 @@ pnpm add clsx
     pnpm exec prisma migrate dev
     ```
 
-6. Correr proyecto
+6. Ejecutar seed
+
+    ```bash
+    pnpm run seed
+    ```
+
+7. Correr proyecto
 
     ```bash
     pnpm run dev

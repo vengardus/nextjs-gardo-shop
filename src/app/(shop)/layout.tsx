@@ -6,8 +6,11 @@ import { Footer } from "@/components/ui/footer/Footer";
 
 
 export const metadata: Metadata = {
-    title: "Gardo-Shop",
-    description: "Shop",
+    title: {
+        template: '%s - Gardo | Shop',
+        default: 'Home - Gardo | Shop'
+    },
+    description: "Tienda virtual de productos",
 };
 
 export default function ShopLayout({
