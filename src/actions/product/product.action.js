@@ -9,7 +9,7 @@ export const getProductBySlug = async (slug) => {
     return product
 };
 
-export const getAllProductsByCategory = async (id) => {
+export const getAllProductsByGender = async (id) => {
     return await initialData.products
         .filter((product) => product.gender === id)
         .slice(0);

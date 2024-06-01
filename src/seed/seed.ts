@@ -8,12 +8,12 @@ export interface ISeedProduct {
     tags: string[];
     title: string;
     type: Type;
-    gender: Category;
+    gender: Gender;
 }
 
 export type Size = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
 type Type = 'shirts'|'pants'|'hoodies'|'hats';
-export type Category = 'men'|'women'|'kid'|'unisex'
+export type Gender = 'men'|'women'|'kid'|'unisex'
 
 interface ISeedData {
     categories: string[],

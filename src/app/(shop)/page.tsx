@@ -1,6 +1,8 @@
+export const revalidate = 60    // 60 segundos
+
 import { getPaginatedProductsWithImages } from "@/actions/product/product-pagination.action";
 import { HomeTemplate } from "@/components/templates/home/HomeTemplate";
-import { initialData } from "@/seed/seed";
+import { getValidNumber } from "@/utils/getValidNumber";
 import { redirect } from "next/navigation";
 
 
@@ -12,7 +14,8 @@ interface Props {
 }
 
 export default async function HomePage({ searchParams }: Props) {
-    const page = isNaN(Number(searchParams.page)) ? 1 : Number(searchParams.page)
+    //const page = isNaN(Number(searchParams.page)) ? 1 : Number(searchParams.page)
+    const page = getValidNumber(searchParams.page)
     const { products, currentPage, totalPages } = await getPaginatedProductsWithImages({ page })
 
     console.log(currentPage, totalPages)

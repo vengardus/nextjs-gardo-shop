@@ -2,15 +2,18 @@
 
 import { IProduct } from "@/interfaces/product.interface";
 import prisma from "@/lib/prisma";
+import { Gender } from "@prisma/client";
 
 interface IPaginationOptions {
     page?: number;
     take?: number;
+    gender?: string;
 }
 
 export const getPaginatedProductsWithImages = async ({
     page = 1,
     take = 10,
+    gender,
 }: IPaginationOptions): Promise<{
     products: IProduct[];
     currentPage: number;
@@ -31,6 +34,13 @@ export const getPaginatedProductsWithImages = async ({
                 },
             },
         },
+        where: {
+            ...(gender
+                ? {
+                      gender: gender as Gender,
+                  }
+                : {}),
+        },
     });
 
     // 3. mapper prodctosDB a tipo IProduct[]
@@ -41,7 +51,15 @@ export const getPaginatedProductsWithImages = async ({
     }));
 
     // 4. Obtener datos de paginación
-    const productCount = await prisma.product.count({});
+    const productCount = await prisma.product.count({
+        where: {
+            ...(gender
+                ? {
+                      gender: gender as Gender,
+                  }
+                : {}),
+        },
+    });
     const totalPages = Math.ceil(productCount / take);
 
     return {

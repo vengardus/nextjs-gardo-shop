@@ -1,6 +1,6 @@
-import { Category } from "@/seed/seed";
+import { Gender } from "@/seed/seed";
 
-export const labelCategory: Record<Category, string> = {
+export const labelGender: Record<Gender, string> = {
     "men": "hombres",
     "women": "mujeres",
     "kid": "niños",
