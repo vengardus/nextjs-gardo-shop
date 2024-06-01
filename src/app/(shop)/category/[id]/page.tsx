@@ -2,7 +2,7 @@ import { notFound } from "next/navigation"
 import { getAllProductsByCategory } from "@/actions/product/product.action"
 import { HomeTemplate } from "@/components/templates/home/HomeTemplate"
 import { Category } from "@/seed/seed"
-import { isValidCategory } from "@/libs/isCategoryValid"
+import { isValidCategory } from "@/utils/isValidCategory"
 
 
 interface Props {
@@ -22,6 +22,7 @@ export default async function CategoryPage({ params }: Props) {
     <HomeTemplate
       products={products}
       category={id}
+      totalPages={6}
     />
   )
 }

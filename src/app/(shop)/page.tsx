@@ -22,6 +22,7 @@ export default async function HomePage({ searchParams }: Props) {
     return (
         <HomeTemplate
             products={products}
+            totalPages={totalPages}
         />
     );
 }

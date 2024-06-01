@@ -3,13 +3,15 @@ import { ProductsGrid } from "@/components/products/products-grid/ProductsGrid"
 import { Title } from "@/components/ui/title/Title"
 import { Category } from "@/seed/seed"
 import { labelCategory } from "@/config/configApp"
+import { Pagination } from "@/components/ui/pagination/Pagination"
 
 interface Props {
   products: IProduct[],
-  category?: Category
+  category?: Category,
+  totalPages: number
 }
 
-export const HomeTemplate = ({ products, category }: Props) => {
+export const HomeTemplate = ({ products, category, totalPages }: Props) => {
 
   return (
     <>
@@ -22,6 +24,8 @@ export const HomeTemplate = ({ products, category }: Props) => {
       <ProductsGrid
         products={products}
       />
+
+      <Pagination totalPages={totalPages}/>
     </>
   )
 }
