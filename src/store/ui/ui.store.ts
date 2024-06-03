@@ -8,9 +8,11 @@ interface State {
 
 export const useUIStore = create<State>()((set) => ({
     isSideMenuOpen: false,
+
     openSideMenu: () => {
         set({ isSideMenuOpen: true })
     },
+    
     closeSideMenu: () => {
         console.log('close')
         set({ isSideMenuOpen: false })
