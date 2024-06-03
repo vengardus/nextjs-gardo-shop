@@ -7,10 +7,18 @@ import {
     IoCartOutline
 } from "react-icons/io5"
 import { useUIStore } from "@/store/ui/ui.store"
+import { useCartStore } from "@/store/cart/cart.store"
+import { useEffect, useState } from "react"
 
 
 export const TopMenu = () => {
     const openMenu = useUIStore(state => state.openSideMenu)
+    const totalItems = useCartStore(state => state.getTotalItems())
+    const [loaded, setLoaded] = useState(false)
+
+    useEffect(() => {
+        setLoaded(true)
+    },[])
 
     return (
         <nav className="flex px-5 justify-between items-center w-full">
@@ -49,9 +57,13 @@ export const TopMenu = () => {
 
                 <Link href={'/cart'} className="mx-2">
                     <div className="relative">
-                        <span className="absolute text-sm rounded-full px-1 font-bold -top-2 -right-3 bg-blue-700 text-white">
-                            3
-                        </span>
+                        {
+                            (loaded && totalItems > 0) && (
+                                <span className="absolute text-sm rounded-full px-1 font-bold -top-2 -right-3 bg-blue-700 text-white">
+                                    {totalItems}
+                                </span>
+                            )
+                        }
                         <IoCartOutline className="w-5 h-5" />
                     </div>
                 </Link>
