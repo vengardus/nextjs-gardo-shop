@@ -1,8 +1,7 @@
 "use server";
 
-import { IProduct } from "@/interfaces/product.interface";
 import prisma from "@/lib/prisma";
-import { Gender } from "@prisma/client";
+import { Gender, IProduct } from "@/interfaces/product.interface";
 
 interface IPaginationOptions {
     page?: number;

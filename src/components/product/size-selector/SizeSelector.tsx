@@ -1,18 +1,20 @@
-import type { Size } from "@/seed/seed"
+import { Size } from "@/interfaces/product.interface"
 import clsx from "clsx"
 
 interface Props {
-    selectedSize: Size,
+    selectedSize?: Size,
     availableSizes: Size[]
+    onSizeChanged: (size: Size) => void
 }
 
 export const SizeSelector = ({
     selectedSize,
-    availableSizes
+    availableSizes,
+    onSizeChanged
 }: Props) => {
     return (
-        <div className="my-3">
-            <h3 className="font-bold text-lg mb-3">Tallas disponibles</h3>
+        <div className="mt-3 mb-2">
+            <h3 className="font-bold text-lg mb-2">Tallas disponibles</h3>
             <div className="flex gap-5">
                 {
                     availableSizes.map(size => (
@@ -26,6 +28,7 @@ export const SizeSelector = ({
                                     }
                                 )
                             }
+                            onClick={()=>onSizeChanged(size)}
                         >
                             {size}
                         </button>

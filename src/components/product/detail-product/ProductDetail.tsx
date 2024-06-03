@@ -3,6 +3,7 @@ import { QuantitySelector } from "../quantity-selector/QuantitySelector"
 import { titleFont } from "@/config/fonts"
 import { IProduct } from "@/interfaces/product.interface"
 import { StockLabel } from "../stock-label/StockLabel"
+import { AddToCart } from "../ui/AddToCart"
 
 
 interface Props {
@@ -22,21 +23,7 @@ export const ProductDetail = ({ product }: Props) => {
 
             <p className="text-xl mb-5">S/. {product.price}</p>
 
-            {/* selector tallas */}
-            <SizeSelector
-                selectedSize={product.sizes[0]}
-                availableSizes={product.sizes}
-            />
-
-            {/* selector cantidad */}
-            <QuantitySelector
-                quantity={1}
-            />
-
-            {/* button carrito*/}
-            <button className="btn-primary my-5">
-                Agregar al carrito
-            </button>
+            <AddToCart product={product}/>
 
             {/* descripción */}
             <h3 className="font-light mb-5">{product.description}</h3>

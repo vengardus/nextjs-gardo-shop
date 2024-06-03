@@ -1,8 +1,7 @@
-import { type IProduct } from "@/interfaces/product.interface"
+import { Gender, type IProduct } from "@/interfaces/product.interface"
 import { ProductsGrid } from "@/components/products/products-grid/ProductsGrid"
 import { Title } from "@/components/ui/title/Title"
 import { Pagination } from "@/components/ui/pagination/Pagination"
-import { Gender } from "@prisma/client"
 import { labelGender } from "@/config/configApp"
 
 interface Props {
