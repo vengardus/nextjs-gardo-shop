@@ -57,25 +57,20 @@ export const TopMenu = () => {
                     <IoSearchOutline className="w-5 h-5" />
                 </Link>
 
-                {/* <Link href={'/cart'} className="mx-2"> */}
-                <div
-                    className="cursor-pointer"
-                    onClick={() => {
-                        if (totalItems) router.push('/cart')
-                    }}
-                >
+                <Link 
+                    href={(totalItems && loaded)? '/cart' :'/empty'}  
+                    className="mx-2">
                     <div className="relative">
                         {
                             (loaded && totalItems > 0) && (
-                                <span className="absolute text-sm rounded-full px-1 font-bold -top-2 -right-3 bg-blue-700 text-white">
+                                <span className="absolute fade-in text-sm rounded-full px-1 font-bold -top-2 -right-3 bg-blue-700 text-white">
                                     {totalItems}
                                 </span>
                             )
                         }
                         <IoCartOutline className="w-5 h-5" />
                     </div>
-                </div>
-                {/* </Link> */}
+                </Link>
 
                 <button
                     className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
