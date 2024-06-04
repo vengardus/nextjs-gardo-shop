@@ -27,7 +27,7 @@ export const ItemsInCart = () => {
         removeProduct(id, size)
     }
 
-    if ( !productsInCart?.length ) redirect('/')
+    if ( loaded && !productsInCart?.length ) redirect('/')
 
     if (!loaded) return <div>Cargando...</div>
 

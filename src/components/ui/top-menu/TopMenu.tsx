@@ -9,16 +9,18 @@ import {
 import { useUIStore } from "@/store/ui/ui.store"
 import { useCartStore } from "@/store/cart/cart.store"
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 
 
 export const TopMenu = () => {
     const openMenu = useUIStore(state => state.openSideMenu)
     const totalItems = useCartStore(state => state.getTotalItems())
     const [loaded, setLoaded] = useState(false)
+    const router = useRouter()
 
     useEffect(() => {
         setLoaded(true)
-    },[])
+    }, [])
 
     return (
         <nav className="flex px-5 justify-between items-center w-full">
@@ -55,7 +57,13 @@ export const TopMenu = () => {
                     <IoSearchOutline className="w-5 h-5" />
                 </Link>
 
-                <Link href={'/cart'} className="mx-2">
+                {/* <Link href={'/cart'} className="mx-2"> */}
+                <div
+                    className="cursor-pointer"
+                    onClick={() => {
+                        if (totalItems) router.push('/cart')
+                    }}
+                >
                     <div className="relative">
                         {
                             (loaded && totalItems > 0) && (
@@ -66,7 +74,8 @@ export const TopMenu = () => {
                         }
                         <IoCartOutline className="w-5 h-5" />
                     </div>
-                </Link>
+                </div>
+                {/* </Link> */}
 
                 <button
                     className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"

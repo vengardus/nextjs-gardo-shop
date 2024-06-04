@@ -1,15 +1,8 @@
-import { Title } from "@/components/ui/title/Title"
-import { initialData, type ISeedProduct } from "@/seed/seed"
-import { CartCheckout } from "../../cart/CartCheckout"
 import Link from "next/link"
+import { Title } from "@/components/ui/title/Title"
+import { CartCheckout } from "../../cart/CartCheckout"
 import { ItemsInCart } from "@/components/cart/ui/ItemsInCart"
 
-
-const products: ISeedProduct[] = [
-  initialData.products[0],
-  initialData.products[1],
-  initialData.products[2]
-]
 
 export const CartTemplate = () => {
   const glosaTitle = 'Agregar mas items'
