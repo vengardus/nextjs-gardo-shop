@@ -1,9 +1,11 @@
-import NextAuth from "next-auth";
+import NextAuth, { CredentialsSignin } from "next-auth";
 
 import GitHub from "next-auth/providers/github";
 //import Google from "next-auth/providers/google"
 import credentials from "next-auth/providers/credentials";
-import {z} from "zod"
+import { z } from "zod";
+import bcryptjs from "bcryptjs";
+import prisma from "./lib/prisma";
 
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
@@ -11,6 +13,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         GitHub,
 
         credentials({
+
             async authorize(credentials) {
                 const parsedCredentials = z
                     .object({
@@ -26,11 +29,16 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                 console.log(email, password);
 
                 // buscar el correo
+                const user = await prisma.user.findUnique({ where: { email } });
+                if (!user) return null;
 
                 // comparar las contraeñas
+                if (!bcryptjs.compareSync(password, user.password)) return null;
 
-                // regresar el usuario
-                return {id:'123'}
+                // regresar el usuario (sin el password)
+                const {password:_, ...rest} = user
+                console.log('user:', rest)
+                return rest;
             },
         }),
     ],

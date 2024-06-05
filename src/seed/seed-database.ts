@@ -5,12 +5,15 @@ const main = async () => {
     // console.log(initialData);
 
     // 1. Elininar registros
+    await prisma.user.deleteMany();
     await prisma.productImage.deleteMany();
     await prisma.product.deleteMany();
     await prisma.category.deleteMany();
 
+    
+    const { categories, products, users } = initialData;
+
     // 2. Insertar catagorías
-    const { categories, products } = initialData;
     const categoriesData = categories.map((name) => ({ name }));
 
     await prisma.category.createMany({
@@ -45,6 +48,11 @@ const main = async () => {
         await prisma.productImage.createMany({
             data: imnagesData
         })
+    });
+
+    // 5. Insertar usuarios
+    await prisma.user.createMany({
+        data: users,
     });
 
     console.log("Seed ejecutado correctamente");
