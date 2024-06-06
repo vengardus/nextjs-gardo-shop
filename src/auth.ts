@@ -34,7 +34,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                     if (!user) return null;
                     
                     // comparar las contraeñas
-                    if (!bcryptjs.compareSync(password, user.password)) return null;
+                    if (!bcryptjs.compareSync(password.toLowerCase(), user.password)) return null;
                     
                     // regresar el usuario (sin el password)
                     const {password:_, ...rest} = user

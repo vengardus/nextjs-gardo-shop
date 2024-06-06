@@ -11,7 +11,7 @@ export default async function ProfilePage() {
     return (
         <div>
             <h1>ProfilePage</h1>
-            <span>{session.user.email}</span>
+            <pre>{JSON.stringify(session.user, null, 2)}</pre>
 
         </div>
     )
