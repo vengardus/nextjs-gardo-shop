@@ -17,7 +17,6 @@ import {
 import { useSession } from "next-auth/react"
 import { useUIStore } from "@/store/ui/ui.store"
 import { logout } from "@/actions/auth/logout.action"
-import { User } from "@prisma/client"
 
 
 export const Sidebar = () => {
@@ -26,7 +25,7 @@ export const Sidebar = () => {
     const closeMenu = useUIStore(state => state.closeSideMenu)
     const { data: session } = useSession()
     const isAuthenticated = !!session?.user
-    const isAdmin = (session?.user as User)?.role == 'admin' ? true : false
+    const isAdmin = session?.user?.role == 'admin' ? true : false
 
     return (
         <div>

@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useForm } from "react-hook-form"
 import clsx from "clsx"
 import { registerUser } from "@/actions/auth/register.action"
+import { login } from "@/actions/auth/login.action"
 
 
 type FormInputs = {
@@ -25,9 +26,18 @@ export const RegisterForm = () => {
         setErrorMessage('')
         const resp = await registerUser(name, email, password)
 
-        if (!resp.success) setErrorMessage(resp.message!)
+        if (!resp.success) {
+            setErrorMessage(resp.message!)
+            return
+        }
 
-        console.log(resp)
+        const respLogin = await login(email, password)
+        if (!respLogin.success) {
+            setErrorMessage(respLogin.message!)
+            return 
+        }
+
+        window.location.replace('/')
     }
 
     return (

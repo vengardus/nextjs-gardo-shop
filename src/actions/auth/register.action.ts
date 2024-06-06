@@ -1,6 +1,6 @@
 "use server";
 
-import { IResponseCrudAction } from "@/interfaces/response.interface";
+import { IResponseAction } from "@/interfaces/response.interface";
 import prisma from "@/lib/prisma";
 import bcryptjs from "bcryptjs";
 
@@ -8,7 +8,7 @@ export const registerUser = async (
     name: string,
     email: string,
     password: string
-):Promise<IResponseCrudAction> => {
+):Promise<IResponseAction> => {
     try {
         const user = await prisma.user.create({
             data: {

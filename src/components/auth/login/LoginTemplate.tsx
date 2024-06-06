@@ -7,18 +7,21 @@ import { IoInformationCircleOutline } from "react-icons/io5";
 import clsx from "clsx";
 import { authenticate } from "@/actions/auth/login.action";
 import { titleFont } from "@/config/fonts";
+import { useSearchParams } from "next/navigation";
 
 
 export const LoginTemplate = () => {
-    const [errorMessage, dispatch] = useFormState(authenticate, undefined);
+    // verifica si viene una ruta para direccionar luego de logear
+    const redirectTo = useSearchParams().get('redirectTo')?? null
 
-    console.log('state', errorMessage)
+    // Estado del Form
+    const [errorMessage, dispatch] = useFormState(authenticate, undefined);
 
     useEffect(() => {
         if (errorMessage === 'Success') {
-            window.location.replace('/')    // asegurar que se refresca el navegador.
+            window.location.replace(redirectTo?? '/')    // asegurar que se refresca el navegador.
         }
-    }, [errorMessage])
+    }, [errorMessage, redirectTo])
 
     return (
         <form action={dispatch} className="flex flex-col min-h-screen justify-center sm:h-svh ">
