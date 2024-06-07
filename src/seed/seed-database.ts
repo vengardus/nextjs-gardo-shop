@@ -9,9 +9,9 @@ const main = async () => {
     await prisma.productImage.deleteMany();
     await prisma.product.deleteMany();
     await prisma.category.deleteMany();
+    await prisma.country.deleteMany();
 
-    
-    const { categories, products, users } = initialData;
+    const { categories, products, users, countries } = initialData;
 
     // 2. Insertar catagorías
     const categoriesData = categories.map((name) => ({ name }));
@@ -42,18 +42,23 @@ const main = async () => {
         // 4.1 Insertar imagenes
         const imnagesData = images.map((image) => ({
             url: image,
-            product_id: newProduct.id
-        }))
+            product_id: newProduct.id,
+        }));
 
         await prisma.productImage.createMany({
-            data: imnagesData
-        })
+            data: imnagesData,
+        });
     });
 
     // 5. Insertar usuarios
     await prisma.user.createMany({
         data: users,
     });
+
+    // 6. Insertar countries
+    await prisma.country.createMany({
+        data: countries
+    })
 
     console.log("Seed ejecutado correctamente");
 };

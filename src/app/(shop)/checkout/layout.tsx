@@ -10,9 +10,8 @@ export default async function CheckOutLayout({ children }: {
         redirect('/auth/login?redirectTo=/checkout/address')
 
     return (
-        <div>
-            <h1>Hello Root Layout CheckOut</h1>
+        <>
             {children}
-        </div>
+        </>
     );
 }
