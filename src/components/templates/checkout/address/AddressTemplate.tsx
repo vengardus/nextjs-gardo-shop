@@ -7,9 +7,10 @@ interface Props {
   data: {
     countries: ICountry[]
   }
+  user_id: string | null
 }
 
-export const AddressTemplate = async ({ data }: Props) => {
+export const AddressTemplate = async ({ data, user_id }: Props) => {
   const { countries } = data
 
   return (
@@ -19,7 +20,10 @@ export const AddressTemplate = async ({ data }: Props) => {
 
         <Title title="Dirección" subTitle="Dirección de entrega" />
 
-        <AddressForm countries={countries} />
+        <AddressForm 
+          countries={countries} 
+          user_id={user_id}
+        />
 
       </div>
 

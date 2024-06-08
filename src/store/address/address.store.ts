@@ -12,11 +12,12 @@ interface State {
         country: string;
         phone: string;
     };
+    setAddress: (address: State["address"]) => void;
 }
 
 export const useAddress = create<State>()(
     persist(
-        (get, set) => ({
+        (set, get) => ({
             address: {
                 firstName: "",
                 lastName: "",
@@ -26,6 +27,10 @@ export const useAddress = create<State>()(
                 city: "",
                 country: "",
                 phone: "",
+            },
+
+            setAddress: (address) => {
+                set({ address });
             },
         }),
         {

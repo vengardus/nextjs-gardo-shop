@@ -1,34 +1,61 @@
 "use client"
+import { deleteUserAddress } from "@/actions/address/delete-user-address.action"
+import { setUserAddress } from "@/actions/address/set-user-address.action"
+import { IAddress } from "@/interfaces/address.interface"
 import type { ICountry } from "@/interfaces/country.interface"
+import { useAddress } from "@/store/address/address.store"
 import clsx from "clsx"
+import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 
-type formInputs = {
-    firstName: string,
-    lastName: string,
-    address: string,
-    address2: string,
-    postalCode: string,
-    city: string,
-    country: string,
-    phone: string,
+// type formInputs2 = {
+//     firstName: string,
+//     lastName: string,
+//     address: string,
+//     address2: string,
+//     postalCode: string,
+//     city: string,
+//     country: string,
+//     phone: string,
+//     rememberAddress: boolean
+// }
+
+interface formInputs extends IAddress {
     rememberAddress: boolean
 }
 
 interface Props {
     countries: ICountry[]
+    user_id: string | null
 }
 
-export const AddressForm = ({ countries }: Props) => {
-    const { register, handleSubmit, formState: { isValid } } = useForm<formInputs>({
+export const AddressForm = ({ countries, user_id }: Props) => {
+    const { register, handleSubmit, formState: { isValid }, reset } = useForm<formInputs>({
         defaultValues: {
             // Todo: leer de la BD
         }
     })
+    const setAddress = useAddress(state => state.setAddress)
+    const address = useAddress(state => state.address)
 
-    const onSubmit = (data: formInputs) => {
+    const onSubmit = async (data: formInputs) => {
         console.log(data)
+        setAddress(data)
+        if (!user_id) {
+            console.error('Se perdió autenticación (no debería ocurrir)')
+            return
+        }
+        const { rememberAddress, ...restAddress } = data
+        if (data.rememberAddress)
+            await setUserAddress(restAddress, user_id)
+        else
+            await deleteUserAddress(user_id)
     }
+
+    useEffect(() => {
+        if (address.firstName)
+            reset(address)
+    }, [address, reset])
 
     return (
         <form
@@ -105,7 +132,7 @@ export const AddressForm = ({ countries }: Props) => {
                                 key={country.id}
                                 value={country.id}
                             >
-                                { country.name}
+                                {country.name}
                             </option>
                         ))
 
