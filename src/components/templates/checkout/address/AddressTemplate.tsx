@@ -1,17 +1,19 @@
 import { Title } from '@/components/ui/title/Title';
 import { AddressForm } from './ui/AddressForm';
 import type { ICountry } from '@/interfaces/country.interface';
+import type { IAddress } from '@/interfaces/address.interface';
 
 
 interface Props {
   data: {
     countries: ICountry[]
+    user_id: string
+    address?: IAddress
   }
-  user_id: string | null
 }
 
-export const AddressTemplate = async ({ data, user_id }: Props) => {
-  const { countries } = data
+export const AddressTemplate = async ({ data }: Props) => {
+  const { countries, user_id, address } = data
 
   return (
     <div className="flex flex-col sm:justify-center sm:items-center mb-72 px-10 sm:px-0">
@@ -20,9 +22,13 @@ export const AddressTemplate = async ({ data, user_id }: Props) => {
 
         <Title title="Dirección" subTitle="Dirección de entrega" />
 
-        <AddressForm 
-          countries={countries} 
-          user_id={user_id}
+        <AddressForm
+          data={{
+            countries: countries,
+            user_id: user_id,
+            address
+          }}
+
         />
 
       </div>

@@ -1,7 +1,7 @@
 "use client"
 import { deleteUserAddress } from "@/actions/address/delete-user-address.action"
 import { setUserAddress } from "@/actions/address/set-user-address.action"
-import { IAddress } from "@/interfaces/address.interface"
+import type { IAddress } from "@/interfaces/address.interface"
 import type { ICountry } from "@/interfaces/country.interface"
 import { useAddress } from "@/store/address/address.store"
 import clsx from "clsx"
@@ -20,31 +20,43 @@ import { useForm } from "react-hook-form"
 //     rememberAddress: boolean
 // }
 
-interface formInputs extends IAddress {
+interface IFormInputs extends IAddress {
     rememberAddress: boolean
 }
 
 interface Props {
-    countries: ICountry[]
-    user_id: string | null
+    data: {
+        countries: ICountry[]
+        user_id: string
+        address?: IAddress
+    }
 }
 
-export const AddressForm = ({ countries, user_id }: Props) => {
-    const { register, handleSubmit, formState: { isValid }, reset } = useForm<formInputs>({
+export const AddressForm = ({ data }: Props) => {
+    const { countries, user_id, address: addressForm } = data
+
+    const setAddress = useAddress(state => state.setAddress)
+    const addressStore = useAddress(state => state.address)
+    const addressInputs: IFormInputs = !addressForm
+        ? {
+            ...addressStore,
+            address2: addressStore.address2 ?? '',
+            rememberAddress: true
+        }
+        : {
+            ...addressForm,
+            rememberAddress: true
+        }
+    const { register, handleSubmit, formState: { isValid }, reset } = useForm<IFormInputs>({
         defaultValues: {
             // Todo: leer de la BD
+            ...addressInputs
         }
     })
-    const setAddress = useAddress(state => state.setAddress)
-    const address = useAddress(state => state.address)
 
-    const onSubmit = async (data: formInputs) => {
-        console.log(data)
+
+    const onSubmit = async (data: IFormInputs) => {
         setAddress(data)
-        if (!user_id) {
-            console.error('Se perdió autenticación (no debería ocurrir)')
-            return
-        }
         const { rememberAddress, ...restAddress } = data
         if (data.rememberAddress)
             await setUserAddress(restAddress, user_id)
@@ -53,9 +65,9 @@ export const AddressForm = ({ countries, user_id }: Props) => {
     }
 
     useEffect(() => {
-        if (address.firstName)
-            reset(address)
-    }, [address, reset])
+        if (addressStore.firstName)
+            reset(addressStore)
+    }, [addressStore, reset])
 
     return (
         <form
