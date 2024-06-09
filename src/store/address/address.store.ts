@@ -15,7 +15,7 @@ interface State {
     setAddress: (address: State["address"]) => void;
 }
 
-export const useAddress = create<State>()(
+export const useAddressStore = create<State>()(
     persist(
         (set, get) => ({
             address: {

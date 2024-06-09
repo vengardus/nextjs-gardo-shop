@@ -1,16 +1,25 @@
+"use client"
+
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ISeedProduct } from "@/seed/seed"
+import { useCartStore } from "@/store/cart/cart.store"
 
-
-interface Props {
-    productsInCart: ISeedProduct[]
-}
-
-export const CheckOutItems = ({ productsInCart }: Props) => {
+export const CheckOutItems = () => {
     const glosaTitle = 'Ajustar elementos'
     const glosaLinkBack = 'Editar carrito'
     const linkBack = '/cart'
+    const [loaded, setLoaded] = useState(false)
+    const productsInCart = useCartStore(state => state.cart)
+
+    useEffect(() => {
+        setLoaded(true)
+    }, [])
+
+    if (!loaded)
+        return (
+            <div>Cargando...</div>
+        )
 
     return (
         <div className="flex flex-col" >
@@ -23,9 +32,9 @@ export const CheckOutItems = ({ productsInCart }: Props) => {
 
             {
                 productsInCart.map(item => (
-                    <div key={item.slug} className="flex mb-3 gap-3">
+                    <div key={`${item.slug}-${item.size}`} className="flex mb-3 gap-3">
                         <Image
-                            src={`/products/${item.images[0]}`}
+                            src={`/products/${item.image}`}
                             width={100}
                             height={100}
                             alt={item.title}
@@ -38,8 +47,8 @@ export const CheckOutItems = ({ productsInCart }: Props) => {
 
                         <div className="">
                             <p>{item.title}</p>
-                            <p>S/. {item.price} x 3</p>
-                            <p className="font-bold">Subtotal: ${item.price * 3}</p>
+                            <p>S/. {item.price} x {item.quantity}</p>
+                            <p className="font-bold">Subtotal: ${item.price * item.quantity}</p>
                             <div className="underline mt-3">
                                 Remover
                             </div>

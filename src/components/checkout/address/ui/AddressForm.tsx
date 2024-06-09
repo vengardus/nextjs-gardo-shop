@@ -1,24 +1,13 @@
 "use client"
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { useForm } from "react-hook-form"
+import clsx from "clsx"
 import { deleteUserAddress } from "@/actions/address/delete-user-address.action"
 import { setUserAddress } from "@/actions/address/set-user-address.action"
 import type { IAddress } from "@/interfaces/address.interface"
 import type { ICountry } from "@/interfaces/country.interface"
-import { useAddress } from "@/store/address/address.store"
-import clsx from "clsx"
-import { useEffect } from "react"
-import { useForm } from "react-hook-form"
-
-// type formInputs2 = {
-//     firstName: string,
-//     lastName: string,
-//     address: string,
-//     address2: string,
-//     postalCode: string,
-//     city: string,
-//     country: string,
-//     phone: string,
-//     rememberAddress: boolean
-// }
+import { useAddressStore } from "@/store/address/address.store"
 
 interface IFormInputs extends IAddress {
     rememberAddress: boolean
@@ -34,14 +23,17 @@ interface Props {
 
 export const AddressForm = ({ data }: Props) => {
     const { countries, user_id, address: addressForm } = data
+    const router = useRouter()
 
-    const setAddress = useAddress(state => state.setAddress)
-    const addressStore = useAddress(state => state.address)
+    const setAddress = useAddressStore(state => state.setAddress)
+    const addressStore = useAddressStore(state => state.address)
+    console.log('AddressForm', addressForm)
     const addressInputs: IFormInputs = !addressForm
         ? {
+            // no hay direccion grabada en la BD
             ...addressStore,
             address2: addressStore.address2 ?? '',
-            rememberAddress: true
+            rememberAddress: false
         }
         : {
             ...addressForm,
@@ -56,12 +48,19 @@ export const AddressForm = ({ data }: Props) => {
 
 
     const onSubmit = async (data: IFormInputs) => {
+        let resp
         setAddress(data)
         const { rememberAddress, ...restAddress } = data
         if (data.rememberAddress)
-            await setUserAddress(restAddress, user_id)
+            resp = await setUserAddress(restAddress, user_id)
         else
-            await deleteUserAddress(user_id)
+            resp = await deleteUserAddress(user_id)
+
+        if (!resp.success)
+            console.error(resp.message)
+        else
+            router.push('/checkout')
+
     }
 
     useEffect(() => {

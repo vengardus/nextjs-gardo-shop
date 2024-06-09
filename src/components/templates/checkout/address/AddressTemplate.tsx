@@ -1,7 +1,7 @@
 import { Title } from '@/components/ui/title/Title';
-import { AddressForm } from './ui/AddressForm';
 import type { ICountry } from '@/interfaces/country.interface';
 import type { IAddress } from '@/interfaces/address.interface';
+import { AddressForm } from '@/components/checkout/address/ui/AddressForm';
 
 
 interface Props {

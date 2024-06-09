@@ -1,14 +1,8 @@
 import { Title } from "@/components/ui/title/Title"
-import { initialData, type ISeedProduct } from "@/seed/seed"
-import { CheckOutItems } from "../../checkout/CheckOutItems"
-import { CheckOutResumen } from "../../checkout/CheckOutResumen"
+import { CheckOutItems } from "../../checkout/(checkout)/CheckOutItems"
+import { CheckOutResumen } from "../../checkout/(checkout)/CheckOutResumen"
 
 
-const products: ISeedProduct[] = [
-  initialData.products[0],
-  initialData.products[1],
-  initialData.products[2]
-]
 
 export const CheckOutTemplate = () => {
   return (
@@ -20,7 +14,7 @@ export const CheckOutTemplate = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
 
           {/* Items en el carrito */}
-          <CheckOutItems productsInCart={products} />
+          <CheckOutItems  />
 
           {/* Checkout - resumen de compra*/}
           <CheckOutResumen />

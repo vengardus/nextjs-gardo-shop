@@ -21,11 +21,12 @@ export default async function AddressPage() {
   const respAddress = await getUserAddress(session.user.id)
   const address:UserAddress = respAddress.success? respAddress.data: null
   console.log('Adress:', address)
-  const addressForm:IAddress = {
+  const addressForm:IAddress|undefined = address? {
     ...address,
     country: address.country_id,
     address2: address.address2?? ''
   }
+  : undefined
 
   return (
     <AddressTemplate
