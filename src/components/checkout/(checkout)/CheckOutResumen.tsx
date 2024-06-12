@@ -1,20 +1,43 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Link from "next/link"
+import clsx from "clsx"
 import { useAddressStore } from "@/store/address/address.store"
 import { useCartStore } from "@/store/cart/cart.store"
 import { currencyFormat } from "@/utils/currencyFormat"
+import { type IProductToOrder, placeOrder } from "@/actions/order/pace-order.action"
 
 
 export const CheckOutResumen = () => {
     const [loaded, setLoaded] = useState(false)
-    const addres = useAddressStore(state => state.address)
+    const [isPlacingOrder, setIsPlacingOrder] = useState(false)
+    const address= useAddressStore(state => state.address)
     const { totalItems, subTotal, tax, total } = useCartStore(state => state.getSumaryCart())
+    const cart = useCartStore(state => state.cart)
 
     useEffect(() => {
         setLoaded(true)
     }, [])
+
+
+    const onPlaceOrder = async () => {
+        setIsPlacingOrder(true)
+
+        const productsToOrder:IProductToOrder[] = cart.map(item => ({
+            product_id: item.id,
+            quantity: item.quantity,
+            size: item.size
+        }))
+        const addressToOrder = {
+            ...address,
+            address2:address.address2?? ''
+        }
+        const resp = await placeOrder(productsToOrder, addressToOrder)
+        console.log('placeOrder', resp)
+
+        setIsPlacingOrder(false)
+    }
+
 
     if (!loaded)
         return (
@@ -25,13 +48,13 @@ export const CheckOutResumen = () => {
         <div className="bg-gray-300 text-black rounded-xl shadow-xl p-7">
             <span className="text-xl font-bold">Dirección de entrega</span>
             <div className="flex flex-col mt-3">
-                <span className="font-bold">{addres.firstName} {addres.lastName}</span>
-                <span>{addres.address}</span>
-                <span>{addres.address2}</span>
-                <span>{addres.city}</span>
-                <span>{addres.country}</span>
-                <span>{addres.postalCode}</span>
-                <span>{addres.phone}</span>
+                <span className="font-bold">{address.firstName} {address.lastName}</span>
+                <span>{address.address}</span>
+                <span>{address.address2}</span>
+                <span>{address.city}</span>
+                <span>{address.country}</span>
+                <span>{address.postalCode}</span>
+                <span>{address.phone}</span>
             </div>
 
             <hr className="w-full h-0.5 bg-gray-700 my-7 rounded-md"></hr>
@@ -59,11 +82,18 @@ export const CheckOutResumen = () => {
             </p>
 
             <div className="flex mt-5 mb-2">
-                <Link
-                    href={'/orders/123'}
-                    className="flex btn-primary justify-center w-full text-xl">
+                <button
+                    //href={'/orders/123'}
+                    onClick={onPlaceOrder}
+                    className={clsx(
+                        {
+                            "btn-primary" : !isPlacingOrder,
+                            "btn-disabled": isPlacingOrder
+                        }
+                    )}
+                >
                     Colocar orden
-                </Link>
+                </button>
             </div>
         </div>
     )

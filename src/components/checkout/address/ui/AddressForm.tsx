@@ -27,7 +27,6 @@ export const AddressForm = ({ data }: Props) => {
 
     const setAddress = useAddressStore(state => state.setAddress)
     const addressStore = useAddressStore(state => state.address)
-    console.log('AddressForm', addressForm)
     const addressInputs: IFormInputs = !addressForm
         ? {
             // no hay direccion grabada en la BD
