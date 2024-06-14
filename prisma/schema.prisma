@@ -119,10 +119,10 @@ model Order {
   tax          Float
   total        Float
   itemsInOrder Int
-  isPaid       Boolean
+  isPaid       Boolean   @default(false)
   paidAt       DateTime?
   createdAt    DateTime  @default(now())
-  updateAt     DateTime
+  updateAt     DateTime  @updatedAt
 
   // Relations
   user         User          @relation(fields: [user_id], references: [id])

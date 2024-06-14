@@ -5,15 +5,20 @@ import clsx from "clsx"
 import { useAddressStore } from "@/store/address/address.store"
 import { useCartStore } from "@/store/cart/cart.store"
 import { currencyFormat } from "@/utils/currencyFormat"
-import { type IProductToOrder, placeOrder } from "@/actions/order/pace-order.action"
+import { type IProductToOrder, placeOrder } from "@/actions/order/place-order.action"
+import { useRouter } from "next/navigation"
+import { APP_CONST } from "@/config/configApp"
 
 
 export const CheckOutResumen = () => {
+    const router = useRouter()
     const [loaded, setLoaded] = useState(false)
     const [isPlacingOrder, setIsPlacingOrder] = useState(false)
-    const address= useAddressStore(state => state.address)
+    const [errorMessage, setErrorMessage] = useState('')
+    const address = useAddressStore(state => state.address)
     const { totalItems, subTotal, tax, total } = useCartStore(state => state.getSumaryCart())
     const cart = useCartStore(state => state.cart)
+    const clearCart = useCartStore(state => state.clearCart)
 
     useEffect(() => {
         setLoaded(true)
@@ -23,19 +28,27 @@ export const CheckOutResumen = () => {
     const onPlaceOrder = async () => {
         setIsPlacingOrder(true)
 
-        const productsToOrder:IProductToOrder[] = cart.map(item => ({
+        const productsToOrder: IProductToOrder[] = cart.map(item => ({
             product_id: item.id,
             quantity: item.quantity,
             size: item.size
         }))
         const addressToOrder = {
             ...address,
-            address2:address.address2?? ''
+            address2: address.address2 ?? ''
         }
         const resp = await placeOrder(productsToOrder, addressToOrder)
-        console.log('placeOrder', resp)
-
         setIsPlacingOrder(false)
+
+        //! ocurrió algún error
+        if (!resp.success) {
+            setErrorMessage(resp.message ?? 'Ocurrió un error!')
+            return
+        }
+
+        //* Todo salió bien
+        clearCart()
+        router.replace(`/orders/${resp.data.order.id}`)
     }
 
 
@@ -67,7 +80,7 @@ export const CheckOutResumen = () => {
                 <span>SubTotal</span>
                 <span className="text-right">{currencyFormat(subTotal)}</span>
 
-                <span>Impuestos (18%)</span>
+                <span>Impuestos ({APP_CONST.igv}%)</span>
                 <span className="text-right">{currencyFormat(tax)}</span>
 
                 <span className="text-2xl mt-5 font-bold">Total</span>
@@ -81,13 +94,19 @@ export const CheckOutResumen = () => {
                 </span>
             </p>
 
+            {
+                isPlacingOrder && <span className="font-bold">Espere un momento por favor...</span>
+
+            }
+            <span className="text-red-500 font-bold">{errorMessage}</span>
+
             <div className="flex mt-5 mb-2">
                 <button
                     //href={'/orders/123'}
                     onClick={onPlaceOrder}
                     className={clsx(
                         {
-                            "btn-primary" : !isPlacingOrder,
+                            "btn-primary": !isPlacingOrder,
                             "btn-disabled": isPlacingOrder
                         }
                     )}

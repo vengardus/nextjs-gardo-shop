@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { ICartProduct, Size } from "@/interfaces/product.interface";
+import { APP_CONST } from "@/config/configApp";
 
 interface State {
     cart: ICartProduct[];
@@ -14,6 +15,7 @@ interface State {
         total: number;
         totalItems: number;
     };
+    clearCart: () => void;
 }
 
 export const useCartStore = create<State>()(
@@ -86,16 +88,20 @@ export const useCartStore = create<State>()(
                         accum + current.price * current.quantity,
                     0
                 );
-                const tax = subTotal * 0.18;
+                const tax = subTotal * (APP_CONST.igv/100);
                 const total = subTotal + tax;
-                const totalItems = getTotalItems()
+                const totalItems = getTotalItems();
 
                 return {
                     subTotal,
                     tax,
                     total,
-                    totalItems
-                }
+                    totalItems,
+                };
+            },
+
+            clearCart: () => {
+                set({ cart: [] });
             },
         }),
         {

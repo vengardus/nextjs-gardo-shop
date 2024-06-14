@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useCartStore } from "@/store/cart/cart.store"
+import { currencyFormat } from "@/utils/currencyFormat"
 
 export const CheckOutItems = () => {
     const glosaTitle = 'Ajustar elementos'
@@ -47,8 +48,8 @@ export const CheckOutItems = () => {
 
                         <div className="">
                             <p>{item.title}</p>
-                            <p>S/. {item.price} x {item.quantity}</p>
-                            <p className="font-bold">Subtotal: ${item.price * item.quantity}</p>
+                            <p>{currencyFormat(item.price)} x {item.quantity}</p>
+                            <p className="font-bold">Subtotal: ${currencyFormat(item.price * item.quantity)}</p>
                             <div className="underline mt-3">
                                 Remover
                             </div>
