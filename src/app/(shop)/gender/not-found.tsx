@@ -1,7 +1,8 @@
 import { PageNotFound } from "@/components/ui/not-found/PageNotFound";
 
-export default function NotFoundPage() {
+export default function GemderNotFoundPage() {
   return (
     <PageNotFound />
   )
 }
+  

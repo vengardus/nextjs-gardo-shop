@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { useCartStore } from "@/store/cart/cart.store"
 import { currencyFormat } from "@/utils/currencyFormat"
+import { APP_CONST } from "@/config/configApp"
 
 
 export const CartSumary = () => {
@@ -23,7 +24,7 @@ export const CartSumary = () => {
             <span>SubTotal</span>
             <span className="text-right">{currencyFormat(subTotal)}</span>
 
-            <span>Impuestos (18%)</span>
+            <span>Impuestos ({APP_CONST.igv}%)</span>
             <span className="text-right">{currencyFormat(tax)}</span>
 
             <span className="text-2xl mt-5 font-bold">Total</span>

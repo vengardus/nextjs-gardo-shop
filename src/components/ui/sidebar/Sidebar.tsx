@@ -93,7 +93,8 @@ export const Sidebar = () => {
                             </Link>
 
                             <Link
-                                href={'/'}
+                                href={'/orders'}
+                                onClick={() => closeMenu()}
                                 className="flex items-center mt-7 px-2 gap-3 hover:bg-gray-100 rounded transition-all"
                             >
                                 <IoTicketOutline size={33} />

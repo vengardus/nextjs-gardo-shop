@@ -9,4 +9,11 @@ export const labelGender: Record<Gender, string> = {
 
 export const APP_CONST = {
     igv: 18,
+    userRole: {
+        user: 'user',
+        admin: 'admin'
+    },
+    errorCode: {
+        unAuthorized: 401
+    }
 };

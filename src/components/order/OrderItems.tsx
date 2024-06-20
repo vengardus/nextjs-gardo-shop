@@ -1,16 +1,20 @@
 import Link from "next/link"
 import Image from "next/image"
 import { ISeedProduct } from "@/seed/seed"
+import { ICartProduct } from "@/interfaces/product.interface"
+import { currencyFormat } from "@/utils/currencyFormat"
+import { IOrderItem } from "@/interfaces/order.interface"
 
 
 interface Props {
-    productsInCart: ISeedProduct[]
+    items: IOrderItem[]
 }
 
-export const OrderItems = ({ productsInCart }: Props) => {
+export const OrderItems = ({ items }: Props) => {
     const glosaTitle = 'Ajustar elementos'
     const glosaLinkBack = 'Editar carrito'
     const linkBack = '/cart'
+
 
     return (
         <div className="flex flex-col" >
@@ -22,13 +26,13 @@ export const OrderItems = ({ productsInCart }: Props) => {
             </Link>
 
             {
-                productsInCart.map(item => (
-                    <div key={item.slug} className="flex mb-3 gap-3">
+                items.map(item => (
+                    <div key={`${item.product.slug}-${item.size}`} className="flex mb-3 gap-3">
                         <Image
-                            src={`/products/${item.images[0]}`}
+                            src={`/products/${item.product.ProductImage[0].url}`}
                             width={100}
                             height={100}
-                            alt={item.title}
+                            alt={item.product.title}
                             className="mr-5 rounded"
                             style={{
                                 width: "100px",
@@ -37,9 +41,9 @@ export const OrderItems = ({ productsInCart }: Props) => {
                         />
 
                         <div className="">
-                            <p>{item.title}</p>
-                            <p>S/. {item.price} x 3</p>
-                            <p className="font-bold">Subtotal: ${item.price * 3}</p>
+                            <p>{item.product.title}</p>
+                            <p>S/. {currencyFormat(item.price)} x {item.quantity}</p>
+                            <p className="font-bold">Subtotal: ${currencyFormat(item.price * item.quantity)}</p>
                             <div className="underline mt-3">
                                 Remover
                             </div>

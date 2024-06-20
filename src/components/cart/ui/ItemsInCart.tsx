@@ -7,6 +7,7 @@ import { QuantitySelector } from "@/components/product/quantity-selector/Quantit
 import { ICartProduct, Size } from "@/interfaces/product.interface"
 import { useCartStore } from "@/store/cart/cart.store"
 import { redirect } from "next/navigation"
+import { currencyFormat } from "@/utils/currencyFormat"
 
 
 export const ItemsInCart = () => {
@@ -56,7 +57,7 @@ export const ItemsInCart = () => {
                             >
                                 {item.size} - {item.title}
                             </Link>
-                            <p>S/. {item.price}</p>
+                            <p>S/. {currencyFormat(item.price)}</p>
                             <QuantitySelector
                                 quantity={item.quantity}
                                 onQuantityChanged={(quantity) => onQuantityChanged(item, quantity)}

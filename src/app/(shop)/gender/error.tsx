@@ -2,7 +2,7 @@
 
 import { PageNotFound } from "@/components/ui/not-found/PageNotFound";
 
-export default function ErrorPage() {
+export default function GenderErrorPage() {
   return (
     <PageNotFound />
   )

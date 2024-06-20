@@ -10,6 +10,14 @@ export interface IProduct {
     title: string;
     //Todo:  type: ValidTypes;
     gender: Gender;
+
+    ProductImage: IProductImage[]
+}
+
+export interface IProductImage {
+    id: number,
+    url: string,
+    product_id: string
 }
 
 export interface ICartProduct {

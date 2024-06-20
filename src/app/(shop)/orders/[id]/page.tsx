@@ -1,18 +1,22 @@
-import OrderTemplate from '@/components/templates/order/OrderTemplate'
-import React from 'react'
+import { getOrderById } from '@/actions/order/get-order-by-id.action'
+import { OrderTemplate } from '@/components/templates/order/OrderTemplate'
+import { IOrder } from '@/interfaces/order.interface'
+import { notFound} from 'next/navigation'
 
 interface Props {
-  params: {
-    id: string
-  }
+    params: {
+        id: string
+    }
 }
-export default function OrderPage({ params }: Props) {
-  const { id } = params
+export default async function OrderPage({ params }: Props) {
+    const { id: orderId } = params
 
-  // Todo: validar id
-  // redirect(' ')
+    const resp = await getOrderById(orderId)
+    if (!resp.success) notFound()
+    
+    const order = resp.data as IOrder
 
-  return (
-    <OrderTemplate id={id} />
-  )
+    return (
+        <OrderTemplate order={order} />
+    )
 }
