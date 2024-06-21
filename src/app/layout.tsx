@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { inter } from "@/config/fonts";
 import "./globals.css";
-import { SessionProvider } from "next-auth/react";
+import { Providers } from "@/components/providers/Providers";
+
 
 
 export const metadata: Metadata = {
@@ -17,9 +18,10 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning={true}>
             <body className={inter.className}>
-                <SessionProvider>
+                <Providers>
                     {children}
-                </SessionProvider>
+                </Providers>
+
             </body>
         </html>
     );
