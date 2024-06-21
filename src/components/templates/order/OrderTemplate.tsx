@@ -15,7 +15,7 @@ export const OrderTemplate = async ({ order }: Props) => {
         <div className="flex justify-center items-center mb-72 px-10 sm:px-0">
             <div className="flex flex-col w-[1000px] bg-red-3001">
 
-                <Title title={`Orden #${order.id}`} />
+                <Title title={`Orden #${order.id.split('-').at(-1)}`} />
 
                 <OrderPaidMessage isPaid={order.isPaid} />
 

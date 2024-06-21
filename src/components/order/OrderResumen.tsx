@@ -12,7 +12,7 @@ export const OrderResumen = ({ order }: Props) => {
     const address = OrderMapper.OrderAddress(order.OrderAddress)
 
     return (
-        <div className="bg-gray-300 text-black rounded-xl shadow-xl p-7">
+        <div className="bg-white text-black rounded-xl shadow-xl p-7">
             <span className="text-xl font-bold">Dirección de entrega</span>
             <div className="flex flex-col mt-3">
                 <span className="font-bold">{address.firstName} {address.lastName}</span>
