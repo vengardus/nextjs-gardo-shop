@@ -2,7 +2,7 @@ import type { IOrder } from "@/interfaces/order.interface"
 import { OrderMapper } from "@/mapper/order.mapper"
 import { currencyFormat } from "@/utils/currencyFormat"
 import { APP_CONST } from "@/config/configApp"
-import { OrderPaidMessage } from "./OrderPaidMessage"
+import { PaypalButton } from "../paypal/PaypalButton"
 
 interface Props {
     order: IOrder
@@ -41,8 +41,9 @@ export const OrderResumen = ({ order }: Props) => {
                 <span className="text-2xl mt-5 font-bold text-right">{currencyFormat(order.total)}</span>
             </div>
 
-            <div className="flex mt-5 mb-2 w-full">
-                <OrderPaidMessage isPaid={order.isPaid} />
+            <div className="mt-5 mb-2 w-full">
+                {/* <OrderPaidMessage isPaid={order.isPaid} /> */}
+                <PaypalButton />
             </div>
         </div>
     )
