@@ -3,6 +3,7 @@ import { OrderMapper } from "@/mapper/order.mapper"
 import { currencyFormat } from "@/utils/currencyFormat"
 import { APP_CONST } from "@/config/configApp"
 import { PaypalButton } from "../paypal/PaypalButton"
+import { OrderPaidMessage } from "./OrderPaidMessage"
 
 interface Props {
     order: IOrder
@@ -42,8 +43,19 @@ export const OrderResumen = ({ order }: Props) => {
             </div>
 
             <div className="mt-5 mb-2 w-full">
-                {/* <OrderPaidMessage isPaid={order.isPaid} /> */}
-                <PaypalButton />
+                {
+                    order.isPaid
+                        ? (
+                            <OrderPaidMessage isPaid={order.isPaid} />
+                        )
+                        : (
+
+                            <PaypalButton
+                                amount={order.total}
+                                orderId={order.id}
+                            />
+                        )
+                }
             </div>
         </div>
     )
