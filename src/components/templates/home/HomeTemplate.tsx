@@ -7,7 +7,7 @@ import { labelGender } from "@/config/configApp"
 interface Props {
   products: IProduct[],
   gender?: string,
-  totalPages: number
+  totalPages: number,
 }
 
 export const HomeTemplate = ({ products, gender, totalPages }: Props) => {

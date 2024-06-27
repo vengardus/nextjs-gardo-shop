@@ -4,22 +4,21 @@ import { generatePaginationNumbers } from "@/utils/generatePaginationNumber"
 import { getValidNumber } from "@/utils/getValidNumber"
 import clsx from "clsx"
 import Link from "next/link"
-import { usePathname, useSearchParams } from "next/navigation"
+import { redirect, usePathname, useSearchParams } from "next/navigation"
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5"
 
 
 interface Props {
     totalPages: number
+    currentPageServer?:number
 }
 
-export const Pagination = ({ totalPages }: Props) => {
+export const Pagination = ({ totalPages, currentPageServer }: Props) => {
 
     const pathName = usePathname()
     const searchParams = useSearchParams()
     const currentPage = getValidNumber(searchParams.get('page')) 
     const allPages = generatePaginationNumbers(currentPage, totalPages)
-
-    console.log('currect', currentPage)
 
     const createPageUrl = (pageNumber: number | string) => {
         const params = new URLSearchParams(searchParams)
@@ -31,6 +30,13 @@ export const Pagination = ({ totalPages }: Props) => {
         params.set('page', pageNumber.toString())
 
         return `${pathName}?${params.toString()}`
+    }
+
+    console.log('currect', currentPage, currentPageServer)
+    if ( currentPageServer &&  currentPage != currentPageServer) {
+        // sucede cuando por ejm estamos en la página 2, salimos a otra opción y volvemos, la currentPage esta en 1 
+        // pero el servidor se quedo con el currentPage en 2 y con ella la data.
+        redirect(createPageUrl(currentPage))
     }
 
     return (

@@ -1,10 +1,10 @@
 // https://tailwindcomponents.com/component/hoverable-table
 import Link from 'next/link';
 import { IoCardOutline } from 'react-icons/io5';
-import { Title } from '../../ui/title/Title';
-import type { IOrder } from '@/interfaces/order.interface';
 import clsx from 'clsx';
+import type { IOrder } from '@/interfaces/order.interface';
 import { currencyFormat } from '@/utils/currencyFormat';
+import { Title } from '@/components/ui/title/Title';
 
 interface Props {
     orders: IOrder[]
@@ -16,7 +16,7 @@ export const OrdersTemplate = ({ orders }: Props) => {
 
     return (
         <>
-            <Title title="Orders" />
+            <Title title="Todas las Ordenes" />
 
             <div className="mb-10">
                 <table className="min-w-full">

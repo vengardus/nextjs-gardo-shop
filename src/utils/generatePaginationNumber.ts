@@ -1,9 +1,9 @@
-const MAX_PAGE_FOR_VIEW = 7;
+import { APP_CONST } from "@/config/configApp";
 
 export const generatePaginationNumbers = (currentPage: number, totalPages: number) => {
     // si total páginas es menor o igual al MAX_PAGE_FOR_VIEW:
     // mostrar todas la páginas sin puntos suspensivos
-    if (totalPages <= MAX_PAGE_FOR_VIEW)
+    if (totalPages <= APP_CONST.pagination.max_page_for_view)
         return Array.from({ length: totalPages }, (_, i) => i + 1);
 
     // si página actual está entre las primeras 3 páginas:

@@ -12,8 +12,8 @@ export const OrderPaidMessage = ({ isPaid }: Props) => {
                 clsx(
                     "flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5 w-full",
                     {
-                        'bg-red-500': !isPaid,
-                        'bg-green-700': isPaid,
+                        'bg-red-700': !isPaid,
+                        'bg-green-800': isPaid,
                     }
                 )
             }>

@@ -14,6 +14,11 @@ export const APP_CONST = {
         admin: 'admin'
     },
     errorCode: {
-        unAuthorized: 401
+        unAuthenticated: 401,
+        unAuthorized: 403
+    },
+    pagination: {
+        take: 2,
+        max_page_for_view: 7
     }
 };

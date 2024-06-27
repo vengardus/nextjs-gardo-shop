@@ -64,7 +64,7 @@ export const getPaginatedProductsWithImages = async ({
         const totalPages = Math.ceil(productCount / take);
         
         return {
-            products,
+            products: products,
             currentPage: page,
             totalPages,
         };

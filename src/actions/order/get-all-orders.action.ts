@@ -6,7 +6,8 @@ import { IResponseAction } from "@/interfaces/response.interface";
 import { getActionError } from "@/utils/getActionError";
 import { APP_CONST } from "@/config/configApp";
 
-export const getOrdesByUser = async (): Promise<IResponseAction> => {
+
+export const getAllOrdes = async (): Promise<IResponseAction> => {
     const resp: IResponseAction = {
         success: false,
     };
@@ -17,12 +18,13 @@ export const getOrdesByUser = async (): Promise<IResponseAction> => {
             resp.errorCode = APP_CONST.errorCode.unAuthenticated;
             throw new Error("Usuario no autenticado");
         }
+        if (session.user.role !== APP_CONST.userRole.admin) {
+            resp.errorCode = APP_CONST.errorCode.unAuthorized;
+            throw new Error("Usuario no autorizdo");
+        }
         const user_id = session.user.id;
 
         const orders = await prisma.order.findMany({
-            where: {
-                user_id,
-            },
             include: {
                 OrderAddress: {
                     select: {

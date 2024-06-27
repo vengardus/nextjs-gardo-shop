@@ -3,4 +3,8 @@ export interface IResponseAction {
     message?: string
     data?: any
     errorCode?: number
+    pagination?: {
+        currentPage: number,
+        totalPages: number
+    }
 }
