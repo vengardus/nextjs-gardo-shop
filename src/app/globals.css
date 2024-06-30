@@ -61,3 +61,24 @@ body {
 .btn-disabled {
   @apply bg-gray-600 hover:bg-gray-800 text-white py-2 px-4 rounded transition-all;
 }
+
+.table-list {
+  @apply min-w-full;
+  thead {
+    @apply bg-gray-200;
+    tr {
+      th {
+        @apply text-sm font-medium text-gray-900 px-6 py-4 text-left;
+      }
+    }
+  }
+  tbody {
+    tr {
+      @apply bg-white transition duration-300 ease-in-out hover:bg-gray-100;
+    }
+  }
+}
+
+.table-tbody-td {
+  @apply text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap;
+}

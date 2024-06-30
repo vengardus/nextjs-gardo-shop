@@ -1,6 +1,6 @@
 "use serrver";
 
-import { IResponseAction } from "@/interfaces/response.interface";
+import { IResponseAction } from "@/interfaces/app/response.interface";
 import prisma from "@/lib/prisma";
 
 export const getUserAddress = async (

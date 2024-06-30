@@ -1,7 +1,7 @@
 "use server";
 
 import type { IAddress } from "@/interfaces/address.interface";
-import type { IResponseAction } from "@/interfaces/response.interface";
+import type { IResponseAction } from "@/interfaces/app/response.interface";
 import prisma from "@/lib/prisma";
 import { getActionError } from "@/utils/getActionError";
 

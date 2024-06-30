@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 import { APP_CONST } from "@/config/configApp";
 import type { IAddress } from "@/interfaces/address.interface";
 import type { Size } from "@/interfaces/product.interface";
-import type { IResponseAction } from "@/interfaces/response.interface";
+import type { IResponseAction } from "@/interfaces/app/response.interface";
 
 export interface IProductToOrder {
     product_id: string;

@@ -1,11 +1,12 @@
 "use client"
 
-import { generatePaginationNumbers } from "@/utils/generatePaginationNumber"
-import { getValidNumber } from "@/utils/getValidNumber"
-import clsx from "clsx"
 import Link from "next/link"
+import clsx from "clsx"
 import { redirect, usePathname, useSearchParams } from "next/navigation"
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5"
+
+import { generatePaginationNumbers } from "@/utils/generatePaginationNumber"
+import { getValidNumber } from "@/utils/getValidNumber"
 
 
 interface Props {

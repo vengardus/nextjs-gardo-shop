@@ -1,8 +1,10 @@
-import { getAllUsers } from "@/actions/user/get-all-users.action";
-import { UsersTemplate } from "@/components/templates/admin/users/UsersTemplate";
 import { PageNotFound } from "@/components/ui/not-found/PageNotFound";
-import { APP_CONST } from "@/config/configApp";
+import { UsersList } from "@/components/admin/user/UsersList";
+
+import { getAllUsers } from "@/actions/user/get-all-users.action";
+
 import { getValidNumber } from "@/utils/getValidNumber";
+import type { IUser } from "@/interfaces/user.interface";
 
 interface Props {
     searchParams: {
@@ -11,26 +13,22 @@ interface Props {
 }
 
 export default async function UsersPage({ searchParams }: Props) {
-    console.log('searchParams', searchParams)
     const page = getValidNumber(searchParams.page)
     const resp = await getAllUsers({ page })
 
-    if (!resp.success && resp.errorCode === APP_CONST.errorCode.unAuthorized) {
-        return (
-            <PageNotFound
-                message={resp.message}
-            />
-        )
-    }
-    
-    const users = resp.data
-    const { currentPage, totalPages } = resp.pagination!
+    if (!resp.success) 
+        return <PageNotFound message={resp.message} />
+
+    const users: IUser[] = resp.data
+    const { currentPage, totalPages } = resp.pagination
 
     return (
-        <UsersTemplate
-            users={users}
-            totalPages={totalPages}
-            currentPageServer={currentPage}
+        <UsersList
+            data={users}
+            pagination={{
+                totalPages: totalPages,
+                currentPageServer: currentPage
+            }}
         />
     )
 }

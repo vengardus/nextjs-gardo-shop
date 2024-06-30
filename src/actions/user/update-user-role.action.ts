@@ -3,7 +3,7 @@
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
 import { getActionError } from "@/utils/getActionError";
-import type { IResponseAction } from "@/interfaces/response.interface";
+import type { IResponseAction } from "@/interfaces/app/response.interface";
 import type { UserRole } from "@/interfaces/user.interface";
 import { APP_CONST } from "@/config/configApp";
 import { revalidatePath } from "next/cache";

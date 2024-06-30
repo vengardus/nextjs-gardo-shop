@@ -1,6 +1,6 @@
 "use server";
 
-import { IResponseAction } from "@/interfaces/response.interface";
+import { IResponseAction } from "@/interfaces/app/response.interface";
 import prisma from "@/lib/prisma";
 import { getActionError } from "@/utils/getActionError";
 import { revalidatePath } from "next/cache";

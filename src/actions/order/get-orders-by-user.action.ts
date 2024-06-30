@@ -2,7 +2,7 @@
 
 import prisma from "@/lib/prisma";
 import { auth } from "@/auth";
-import { IResponseAction } from "@/interfaces/response.interface";
+import { IResponseAction } from "@/interfaces/app/response.interface";
 import { getActionError } from "@/utils/getActionError";
 import { APP_CONST } from "@/config/configApp";
 

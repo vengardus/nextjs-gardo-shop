@@ -1,7 +1,7 @@
 "use server"
 
 import { signIn } from "@/auth";
-import { IResponseAction } from "@/interfaces/response.interface";
+import { IResponseAction } from "@/interfaces/app/response.interface";
 
 
 export async function authenticate(

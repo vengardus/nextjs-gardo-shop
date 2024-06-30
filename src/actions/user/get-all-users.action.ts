@@ -2,7 +2,7 @@
 
 import { auth } from "@/auth";
 import { APP_CONST } from "@/config/configApp";
-import { IResponseAction } from "@/interfaces/response.interface";
+import { IResponseAction } from "@/interfaces/app/response.interface";
 import prisma from "@/lib/prisma";
 import { getActionError } from "@/utils/getActionError";
 import { initResponseAction } from "@/utils/initResponseAction";
@@ -18,8 +18,6 @@ export const getAllUsers = async ({
     take = APP_CONST.pagination.take,
 }: IPaginationOptions): Promise<IResponseAction> => {
     const resp = initResponseAction();
-
-    console.log('Page', page)
 
     // PAGINACION: Validar page y take
     if (page < 1) page = 1;

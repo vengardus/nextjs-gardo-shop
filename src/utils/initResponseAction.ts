@@ -1,4 +1,4 @@
-import { IResponseAction } from "@/interfaces/response.interface";
+import { IResponseAction } from "@/interfaces/app/response.interface";
 
 export const initResponseAction = ():IResponseAction => {
     const resp: IResponseAction = {
