@@ -1,10 +1,14 @@
 export const revalidate = 60  // 60 segundos
 
 import { notFound, redirect } from "next/navigation"
+
 import { HomeTemplate } from "@/components/templates/home/HomeTemplate"
+
+import { getAllProductsWithImages } from "@/actions/product/get-all-products.action"
+
 import { isValidGender } from "@/utils/isValidGender"
-import { getPaginatedProductsWithImages } from "@/actions/product/product-pagination.action"
 import { getValidNumber } from "@/utils/getValidNumber"
+import type { IProduct } from "@/interfaces/product.interface"
 
 
 interface Props {
@@ -21,11 +25,13 @@ export default async function GenderByPage({ params, searchParams }: Props) {
   if (!isValidGender(gender)) notFound()
 
   const page = getValidNumber(searchParams.page)
-  console.log('params', params)
-  const { products, totalPages } = await getPaginatedProductsWithImages({ page, gender })
 
+  const resp = await getAllProductsWithImages(true, { page }, gender )
   //if ( id === 'kids') notFound()
-  if (!products.length) redirect(`/gender/${gender}`)
+  if (!resp.success) redirect(`/gender/${gender}`)
+
+  const products: IProduct[] = resp.data
+  const { totalPages } = resp.pagination
 
 
   return (

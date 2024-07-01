@@ -18,7 +18,7 @@ export const APP_CONST = {
         unAuthorized: 403,
     },
     pagination: {
-        take: 7,
+        take: 2,
         max_page_for_view: 7,
     },
     metaModel : {
@@ -29,6 +29,10 @@ export const APP_CONST = {
         product: {
             verboseName: "producto",
             verboseNamePlural: "productos",
+        },
+        order: {
+            verboseName: "orden",
+            verboseNamePlural: "ordenes",
         }
     }
 };

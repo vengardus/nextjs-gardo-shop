@@ -1,34 +1,42 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { isUserAdmin } from "../auth/is-user-admin.action";
+
+import { APP_CONST } from "@/config/configApp";
 import { getActionError } from "@/utils/getActionError";
 import { initResponseAction } from "@/utils/initResponseAction";
-import { APP_CONST } from "@/config/configApp";
-import { IResponseAction } from "@/interfaces/app/response.interface";
 import { ProductMapper } from "@/mapper/product.mapper";
+import type { IResponseAction } from "@/interfaces/app/response.interface";
+import type { IPagination } from "@/interfaces/app/pagination.interface";
+import type { Gender } from "@/interfaces/product.interface";
 
-interface IPaginationOptions {
-    page?: number;
-    take?: number;
-}
-
-export const getAllProducts = async ({
-    page = 1,
-    take = APP_CONST.pagination.take,
-}: IPaginationOptions): Promise<IResponseAction> => {
+export const getAllProductsWithImages = async (
+    applyPagination: boolean = false,
+    pagination?: IPagination,
+    gender?: string
+): Promise<IResponseAction> => {
     const resp = initResponseAction();
 
-    // PAGINACION: Validar page y take
+    // 0. Obtener datos de pagination o default
+    let page, take, skip;
+    if (!applyPagination) {
+        take = undefined;
+        skip = 0;
+        page = 1;
+    } else {
+        page = pagination?.page ?? 1;
+        take = pagination?.take ?? APP_CONST.pagination.take;
+        skip = (page - 1) * take;
+    }
+
+    // 1. Validar page y take
     if (page < 1) page = 1;
 
     try {
-        const respAuth = await isUserAdmin(resp);
-        if (!respAuth.success) throw new Error(respAuth.resp.message);
-
+        // 2. Obtener productos
         const productsDB = await prisma.product.findMany({
-            take: take,
-            skip: (page - 1) * take,
+            take,
+            skip,
             include: {
                 ProductImage: {
                     take: 2,
@@ -37,26 +45,42 @@ export const getAllProducts = async ({
                     },
                 },
             },
-            orderBy: {
-                title: "asc",
+            where: {
+                ...(gender
+                    ? {
+                          gender: gender as Gender,
+                      }
+                    : {}),
             },
         });
 
-        // 3. mapper prodctosDB a tipo IProduct[]
-        const products = ProductMapper.IProductFromPrismaProduct(productsDB)
+        // 3. Obtener datos de paginación
+        if (applyPagination) {
+            const productCount = await prisma.product.count({
+                where: {
+                    ...(gender
+                        ? {
+                              gender: gender as Gender,
+                          }
+                        : {}),
+                },
+            });
+            const totalPages = Math.ceil(productCount / take!);
 
-        // PAGINACION: Obtener número de paginas
-        const count = await prisma.product.count();
-        const totalPages = Math.ceil(count / take);
-        
-        // Definir respuesta
+            resp.pagination = {
+                currentPage: page,
+                totalPages: totalPages!,
+            };
+        }
+
+        // 4. Mapper prodctosDB a IProduct[]
+        const products = ProductMapper.IProductFromPrismaProduct(productsDB);
+
         resp.success = true;
-        resp.data = products,
-        resp.pagination!.currentPage = page,
-        resp.pagination!.totalPages = totalPages
-
+        resp.data = products;
+        
     } catch (error) {
-        resp.message = getActionError(error);
+        resp.message = getActionError("No se pudo cargar los productos");
     }
 
     return resp;

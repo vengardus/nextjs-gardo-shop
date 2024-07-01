@@ -1,15 +1,36 @@
 import { notFound } from "next/navigation";
-import { OrdersTemplate } from "@/components/templates/admin/orders/OrdersTemplate";
+
+import { OrdersList } from "@/components/orders/OrdersList";
+
+import { getAllOrders } from "@/actions/order/get-all-orders.action";
+
+import { getValidNumber } from "@/utils/getValidNumber";
 import { APP_CONST } from "@/config/configApp";
-import { getAllOrdes } from "@/actions/order/get-all-orders.action";
+import { IOrder } from "@/interfaces/order.interface";
 
+interface Props {
+    searchParams: {
+        page?: string
+    }
+}
 
-export default async function OrdersPage() {
-    const resp = await getAllOrdes()
-    console.log(resp.data)
+export default async function AdminOrdersPage({ searchParams }: Props) {
+    const page = getValidNumber(searchParams.page)
+
+    const resp = await getAllOrders(true, { page })
+
     if (!resp.success && resp.errorCode === APP_CONST.errorCode.unAuthorized) notFound()
 
+    const data: IOrder[] = resp.data
+    const { currentPage, totalPages } = resp.pagination
+
     return (
-        <OrdersTemplate orders={resp.data} />
+        <OrdersList 
+            data={resp.data} 
+            pagination={{
+                totalPages: totalPages,
+                currentPageServer: currentPage
+            }}
+        />
     )
 }
