@@ -1,10 +1,9 @@
 import { PageNotFound } from "@/components/ui/not-found/PageNotFound";
-import { UsersList } from "@/components/admin/users/UsersList";
-
-import { getAllUsers } from "@/actions/user/get-all-users.action";
+import { ProductsList } from "@/components/admin/products/ProductsList";
 
 import { getValidNumber } from "@/utils/getValidNumber";
-import type { IUser } from "@/interfaces/user.interface";
+import { getAllProducts } from "@/actions/product/get-all-products.action";
+import { IProduct } from "@/interfaces/product.interface";
 
 interface Props {
     searchParams: {
@@ -12,18 +11,18 @@ interface Props {
     }
 }
 
-export default async function UsersPage({ searchParams }: Props) {
+export default async function ProductsPage({ searchParams }: Props) {
     const page = getValidNumber(searchParams.page)
-    const resp = await getAllUsers({ page })
+    const resp = await getAllProducts({ page })
 
     if (!resp.success) 
         return <PageNotFound message={resp.message} />
 
-    const data: IUser[] = resp.data
+    const data: IProduct[] = resp.data
     const { currentPage, totalPages } = resp.pagination
 
     return (
-        <UsersList
+        <ProductsList
             data={data}
             pagination={{
                 totalPages: totalPages,

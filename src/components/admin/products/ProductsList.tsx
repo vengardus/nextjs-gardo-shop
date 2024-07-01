@@ -1,31 +1,34 @@
 import { Pagination } from '@/components/ui/pagination/Pagination';
-import { ListTableUser } from '@/components/admin/user/ListTableUser';
+import { ListTableProduct } from '@/components/admin/products/ListTableProduct';
 import { ListHeader } from '@/components/ui/list-view/list-header/ListHeader';
 
 import { APP_CONST } from '@/config/configApp';
-import type { IUser } from '@/interfaces/user.interface';
+import type { IProduct } from '@/interfaces/product.interface';
 
 interface Props {
-    data: IUser[]
+    data: IProduct[]
     pagination: {
         totalPages: number
         currentPageServer: number
     }
 }
 
-const model = APP_CONST.metaModel.user
+const model = APP_CONST.metaModel.product
 
-export const UsersList = ({ data, pagination }: Props) => {
+export const ProductsList = ({ data, pagination }: Props) => {
 
     return (
         <>
             <ListHeader
                 title='Mantenimiento de'
                 metaModel={model}
+                options={{
+                    add: true
+                }}
             />
 
             <div className="mb-10">
-                <ListTableUser
+                <ListTableProduct
                     data={data}
                     metaModel={model}
                 />

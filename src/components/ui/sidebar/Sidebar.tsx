@@ -136,8 +136,9 @@ export const Sidebar = () => {
                             {/* line separator */}
                             <div className="w-full h-px bg-gray-400 my-10"></div>
                             <Link
-                                href={'/'}
+                                href={'/admin/products'}
                                 className="flex items-center mt-7 px-2 gap-3 hover:bg-gray-100 rounded transition-all"
+                                onClick={() => closeMenu()}
                             >
                                 <IoShirtOutline size={33} />
                                 <span className="text-xl">Productos</span>

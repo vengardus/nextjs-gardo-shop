@@ -18,13 +18,17 @@ export const APP_CONST = {
         unAuthorized: 403,
     },
     pagination: {
-        take: 2,
+        take: 7,
         max_page_for_view: 7,
     },
     metaModel : {
         user: {
             verboseName: "usuario",
             verboseNamePlural: "usuarios",
+        },
+        product: {
+            verboseName: "producto",
+            verboseNamePlural: "productos",
         }
     }
 };

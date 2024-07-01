@@ -3,82 +3,87 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --primary: #274494;
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 214, 219, 220;
-    --background-end-rgb: 255, 255, 255;
-  }
-} 
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-start-rgb))
-      )
-      rgb(var(--background-end-rgb))
+    :root {
+        --primary: #274494;
+        --foreground-rgb: 0, 0, 0;
+        --background-start-rgb: 214, 219, 220;
+        --background-end-rgb: 255, 255, 255;
+    }
 }
 
-
+body {
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(
+            to bottom,
+            transparent,
+            rgb(var(--background-start-rgb))
+        )
+        rgb(var(--background-end-rgb));
+}
 
 @keyframes fadeIn {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
-} 
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 
 @-webkit-keyframes fadeIn {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .fade-in {
-  -webkit-animation-duration: 0.5s;
-  animation-duration: 0.5s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
 
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
 }
 
-
 .btn-primary {
-  @apply bg-blue-600 hover:bg-blue-800 text-white py-2 px-4 rounded transition-all;
+    @apply bg-blue-600 hover:bg-blue-800 text-white py-2 px-4 rounded transition-all;
 }
 
 .btn-secondary {
-  @apply bg-gray-200 hover:bg-gray-300 text-black py-2 px-4 rounded transition-all;
+    @apply bg-gray-200 hover:bg-gray-300 text-black py-2 px-4 rounded transition-all;
 }
 
 .btn-disabled {
-  @apply bg-gray-600 hover:bg-gray-800 text-white py-2 px-4 rounded transition-all;
+    @apply bg-gray-600 hover:bg-gray-800 text-white py-2 px-4 rounded transition-all;
 }
 
 .table-list {
-  @apply min-w-full;
-  thead {
-    @apply bg-gray-200;
-    tr {
-      th {
-        @apply text-sm font-medium text-gray-900 px-6 py-4 text-left;
-      }
+    @apply min-w-full;
+    thead {
+        @apply bg-gray-200;
+        tr {
+            th {
+                @apply text-sm font-bold text-gray-900 px-6 py-4 text-left;
+            }
+        }
     }
-  }
-  tbody {
-    tr {
-      @apply bg-white transition duration-300 ease-in-out hover:bg-gray-100;
+    tbody {
+        tr {
+            @apply bg-white transition duration-300 ease-in-out hover:bg-gray-100;
+        }
     }
-  }
 }
 
 .table-tbody-td {
-  @apply text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap;
+    @apply text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap;
 }
