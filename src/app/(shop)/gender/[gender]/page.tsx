@@ -2,7 +2,7 @@ export const revalidate = 60  // 60 segundos
 
 import { notFound, redirect } from "next/navigation"
 
-import { HomeTemplate } from "@/components/templates/home/HomeTemplate"
+import { ProductList } from "@/components/products/ProductList"
 
 import { getAllProductsWithImages } from "@/actions/product/get-all-products.action"
 
@@ -35,7 +35,7 @@ export default async function GenderByPage({ params, searchParams }: Props) {
 
 
   return (
-    <HomeTemplate
+    <ProductList
       products={products}
       gender={gender}
       totalPages={totalPages}

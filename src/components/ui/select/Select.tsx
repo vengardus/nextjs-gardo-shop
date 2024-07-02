@@ -3,16 +3,16 @@ interface Props {
     id: string
     current : {
         value: string
-        id: string
     }
     data : {
         value: string
         label: string
     }[]
+    parentId?: string
     onChange: (value:string, id:string) => void
 }
 
-export const Select = ({id, current, data, onChange}:Props) => {
+export const Select = ({id, current, data, onChange, parentId}:Props) => {
 
     return (
         <select
@@ -26,11 +26,15 @@ export const Select = ({id, current, data, onChange}:Props) => {
                                                       dark:focus:ring-blue-500
                                                        dark:focus:border-blue-500"
             value={current.value}
-            onChange={e => onChange(e.target.value, current.id)}
+            onChange={e => onChange(e.target.value, parentId?? '')}
         >
+            <option value="">[Seleccione]</option>
             {
                 data.map(item => (
-                    <option key={item.value} value={item.value}>{item.label}</option>
+                    <option 
+                        key={item.value} 
+                        value={item.value}>{item.label}
+                    </option>
                 ))
             }
         </select>

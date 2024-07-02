@@ -1,41 +1,46 @@
 export const revalidate = 604800  // 7 dias aprox
 
-
-import { getProductBySlug } from '@/actions/product/product-by-slug'
-import { ProductTemplate } from '@/components/templates/product/ProductTemplate'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import { ProductMain } from '@/components/product/ProductMain'
+import { getProductBySlug } from '@/actions/product/product-by-slug'
+import { IProduct } from '@/interfaces/product.interface'
+
 interface Props {
-  params: {
-    slug: string
-  }
+    params: {
+        slug: string
+    }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  //const pokemon = await actionGetPokemon(params.name)
-  const product = await getProductBySlug(params?.slug)
-  return {
-      title: `${product?.title}`,
-      description: `${product?.description}?? ''`,
-      openGraph: {
+    const resp = await getProductBySlug(params?.slug)
+    const product: IProduct = (resp.success)? resp.data : null
+
+    return {
         title: `${product?.title}`,
         description: `${product?.description}?? ''`,
-        images:[`/products/${product?.images[1]}`]
-      }
-  }
+        openGraph: {
+            title: `${product?.title}`,
+            description: `${product?.description}?? ''`,
+            images: [`/products/${product?.images[1]}`]
+        }
+    }
 }
 
 
 export default async function ProductPage({ params }: Props) {
-  const { slug } = params
-  const product = await getProductBySlug(slug)
+    const { slug } = params
+    const resp = await getProductBySlug(slug)
 
-  if (!product) notFound()
+    if (!resp.data) notFound()
 
-  return (
-    <ProductTemplate
-      product={product}
-    />
-  )
+    const product: IProduct = resp.data
+
+
+    return (
+        <ProductMain
+            product={product}
+        />
+    )
 }

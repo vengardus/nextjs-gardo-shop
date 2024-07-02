@@ -7,6 +7,7 @@ interface Props {
     metaModel: IMetaModel
     options?: {
         add?: boolean
+        addOnClick: (x:string) => void
     }
 }
 
@@ -26,7 +27,12 @@ export const ListHeader = ({ title, metaModel, options }: Props) => {
                     <div className="flex justify-end gap-2">
                         {
                             options.add &&
-                            <button className="btn-primary">Agregar {toCapitalize(metaModel.verboseName)}</button>
+                            <button 
+                                className="btn-primary"
+                                onClick={() => options.addOnClick('new')}
+                            >
+                                Agregar {toCapitalize(metaModel.verboseName)}
+                            </button>
                         }
                     </div>
                 }

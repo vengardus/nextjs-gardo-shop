@@ -10,8 +10,6 @@ export class ProductMapper {
             inStock: product.in_stock,
         }));
 
-        console.log(products[0])
-
         return products
     }
 

@@ -7,7 +7,7 @@ interface Props {
   product: IProduct,
 }
 
-export const ProductTemplate = ({ product }: Props) => {
+export const ProductMain = ({ product }: Props) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
 

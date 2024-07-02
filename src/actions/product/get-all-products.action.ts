@@ -28,6 +28,7 @@ export const getAllProductsWithImages = async (
         take = pagination?.take ?? APP_CONST.pagination.take;
         skip = (page - 1) * take;
     }
+    console.log('XXX', take, skip, page, pagination)
 
     // 1. Validar page y take
     if (page < 1) page = 1;
@@ -75,7 +76,7 @@ export const getAllProductsWithImages = async (
 
         // 4. Mapper prodctosDB a IProduct[]
         const products = ProductMapper.IProductFromPrismaProduct(productsDB);
-
+        
         resp.success = true;
         resp.data = products;
         

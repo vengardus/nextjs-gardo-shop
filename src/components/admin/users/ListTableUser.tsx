@@ -46,9 +46,9 @@ export const ListTableUser = ({ data, metaModel }: Props) => {
                     id="roles"
                     current={{
                         value: item.role,
-                        id: item.id
                     }}
                     data={dataRoles}
+                    parentId = {item.id}
                     onChange={(role, userId) => onChangeRole(role, userId)}
                 />
             )
@@ -56,6 +56,7 @@ export const ListTableUser = ({ data, metaModel }: Props) => {
     ]
 
     const onChangeRole = async (role: string, userId: string) => {
+        if ( !role ) return 
         setMessageError(null)
         const resp = await updateUserRole(userId, role as UserRole)
         if (!resp.success) setMessageError(resp.message ?? '')

@@ -15,10 +15,14 @@ interface Props {
 export default async function ProductsPage({ searchParams }: Props) {
     const page = getValidNumber(searchParams.page)
 
-    const resp = await getAllProductsWithImages(true, page)
+    const resp = await getAllProductsWithImages(true, {page})
+
+    console.log(resp.success, page)
 
     if (!resp.success)
-        return <PageNotFound message={resp.message} />
+        return <PageNotFound
+            message={resp.message}
+        />
 
     const data: IProduct[] = resp.data
     const { currentPage, totalPages } = resp.pagination

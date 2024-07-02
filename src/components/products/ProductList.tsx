@@ -10,7 +10,7 @@ interface Props {
   totalPages: number,
 }
 
-export const HomeTemplate = ({ products, gender, totalPages }: Props) => {
+export const ProductList = ({ products, gender, totalPages }: Props) => {
 
   return (
     <>

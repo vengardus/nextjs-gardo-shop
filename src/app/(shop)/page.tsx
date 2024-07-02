@@ -2,12 +2,12 @@ export const revalidate = 60    // 60 segundos
 
 import { redirect } from "next/navigation";
 
-import { HomeTemplate } from "@/components/templates/home/HomeTemplate";
+import { ProductList } from "@/components/products/ProductList";
 
+import { getAllProductsWithImages } from "@/actions/product/get-all-products.action";
 
 import { getValidNumber } from "@/utils/getValidNumber";
 import type { IProduct } from "@/interfaces/product.interface";
-import { getAllProductsWithImages } from "@/actions/product/get-all-products.action";
 
 
 //const products = initialData.products.slice(0)
@@ -30,7 +30,7 @@ export default async function HomePage({ searchParams }: Props) {
 
 
     return (
-        <HomeTemplate
+        <ProductList
             products={products}
             totalPages={totalPages}
         />

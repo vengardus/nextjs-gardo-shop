@@ -33,7 +33,6 @@ export const Pagination = ({ totalPages, currentPageServer }: Props) => {
         return `${pathName}?${params.toString()}`
     }
 
-    console.log('currect', currentPage, currentPageServer)
     if ( currentPageServer &&  currentPage != currentPageServer) {
         // sucede cuando por ejm estamos en la página 2, salimos a otra opción y volvemos, la currentPage esta en 1 
         // pero el servidor se quedo con el currentPage en 2 y con ella la data.

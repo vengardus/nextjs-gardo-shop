@@ -10,6 +10,7 @@ export interface IProduct {
     title: string;
     //Todo:  type: ValidTypes;
     gender: Gender;
+    category_id:  string;
 
     ProductImage: IProductImage[]
 }
