@@ -35,7 +35,7 @@ export const ListTableProduct = ({ data, metaModel }: Props) => {
     const columns: IDataTableColumn<IProduct>[] = [
         {
             value: (item) => (
-                <Link href={`/product/${item.slug}`} >
+                <Link href={`/admin/products/${item.slug}`} >
                     <Image
                         src={`/products/${item.images[0]}`}
                         alt={item.title}

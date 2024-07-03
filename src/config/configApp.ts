@@ -21,7 +21,7 @@ export const APP_CONST = {
         take: 7,
         max_page_for_view: 7,
     },
-    metaModel : {
+    metaModel: {
         user: {
             verboseName: "usuario",
             verboseNamePlural: "usuarios",
@@ -33,17 +33,37 @@ export const APP_CONST = {
         order: {
             verboseName: "orden",
             verboseNamePlural: "ordenes",
-        }
-    }
+        },
+    },
 };
 
-export const dataRoles = [
-    {
-        value: APP_CONST.userRole.admin,
-        label: "Administrador",
-    },
-    {
-        value: APP_CONST.userRole.user,
-        label: "Usuario",
-    },
-];
+export const dataApp = {
+    roles: [
+        {
+            value: APP_CONST.userRole.admin,
+            label: "Administrador",
+        },
+        {
+            value: APP_CONST.userRole.user,
+            label: "Usuario",
+        },
+    ],
+    gender: [
+        {
+            value:'men',
+            label:'Men'
+        },
+        {
+            value:'women',
+            label:'Women'
+        },
+        {
+            value:'kid',
+            label:'Kid'
+        },
+        {
+            value:'unisex',
+            label:'Unusex'
+        },
+    ]
+};

@@ -11,7 +11,7 @@ import { MessageError } from "@/components/ui/table/MessageError"
 
 import { updateUserRole } from "@/actions/user/update-user-role.action"
 
-import { dataRoles } from "@/config/configApp"
+import { dataApp } from "@/config/configApp"
 import { setColumnHeader } from "@/utils/setColumnHeader"
 import type { IUser, UserRole } from "@/interfaces/user.interface"
 import type { IDataTableColumn } from "@/interfaces/app/table.interface"
@@ -44,10 +44,8 @@ export const ListTableUser = ({ data, metaModel }: Props) => {
             value: (item) => (
                 <Select
                     id="roles"
-                    current={{
-                        value: item.role,
-                    }}
-                    data={dataRoles}
+                    defaultValue={item.role}
+                    data={dataApp.roles}
                     parentId = {item.id}
                     onChange={(role, userId) => onChangeRole(role, userId)}
                 />

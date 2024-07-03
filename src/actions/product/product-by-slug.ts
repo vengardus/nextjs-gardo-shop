@@ -6,11 +6,10 @@ import { IResponseAction } from "@/interfaces/app/response.interface";
 import { initResponseAction } from "@/utils/initResponseAction";
 import { getActionError } from "@/utils/getActionError";
 
-
 export const getProductBySlug = async (
     slug: string
 ): Promise<IResponseAction> => {
-    const resp = initResponseAction()
+    const resp = initResponseAction();
 
     try {
         const product = await prisma.product.findFirst({
@@ -18,6 +17,7 @@ export const getProductBySlug = async (
                 ProductImage: {
                     select: {
                         url: true,
+                        id: true,
                     },
                 },
             },
@@ -26,8 +26,7 @@ export const getProductBySlug = async (
             },
         });
 
-        if ( ! product ) 
-            resp.data = product 
+        if (!product) resp.data = product;
         else {
             // mapper
             const productTOIProduct = {
@@ -35,12 +34,11 @@ export const getProductBySlug = async (
                 images: product.ProductImage.map((image) => image.url),
                 inStock: product.in_stock,
             };
-            resp.data = productTOIProduct
+            resp.data = productTOIProduct;
         }
-        resp.success = true
-
+        resp.success = true;
     } catch (error) {
-        resp.message = getActionError(error)
+        resp.message = getActionError(error);
     }
     return resp;
 };

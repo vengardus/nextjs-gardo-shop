@@ -1,18 +1,23 @@
 
 interface Props {
     id: string
-    current : {
-        value: string
-    }
+    defaultValue? : string
     data : {
         value: string
         label: string
     }[]
     parentId?: string
-    onChange: (value:string, id:string) => void
+    onChange?: (value:string, id:string) => void
+    register?: ((name:any) => void) | null
 }
 
-export const Select = ({id, current, data, onChange, parentId}:Props) => {
+export const Select = ({id, defaultValue, data, onChange, parentId, register}:Props) => {
+    const registerField = register? register(id) : {}
+
+    const handleOnChange = (value:string) => {
+        if ( onChange )
+            onChange(value, parentId?? '')
+    }
 
     return (
         <select
@@ -25,8 +30,9 @@ export const Select = ({id, current, data, onChange, parentId}:Props) => {
                                                      dark:text-white
                                                       dark:focus:ring-blue-500
                                                        dark:focus:border-blue-500"
-            value={current.value}
-            onChange={e => onChange(e.target.value, parentId?? '')}
+            defaultValue={defaultValue?? ''}
+            onChange={e => handleOnChange(e.target.value)}
+            {...registerField}
         >
             <option value="">[Seleccione]</option>
             {
