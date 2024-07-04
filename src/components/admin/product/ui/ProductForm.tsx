@@ -1,15 +1,14 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-
-import { Select } from "@/components/ui/select/Select";
-
-import type { IDataSelect } from "@/interfaces/app/data-select.interface";
-import type { Gender, IProduct, Size } from "@/interfaces/product.interface";
-import { dataApp } from "@/config/configApp";
 import Image from "next/image";
 import clsx from "clsx";
-import { array } from "zod";
+
+import { Select } from "@/components/ui/select/Select";
+import { createUpdateProduct } from "@/actions/product/create-update-product";
+import { dataApp } from "@/config/configApp";
+import type { IDataSelect } from "@/interfaces/app/data-select.interface";
+import type { Gender, IProduct, Size } from "@/interfaces/product.interface";
 
 interface Props {
     product: IProduct | null;
@@ -64,12 +63,30 @@ export const ProductForm = ({ product, data }: Props) => {
 
     const onSizeChanged = (size: Size) => {
         const newSizes = new Set(getValues('sizes'))
-        newSizes.has(size)? newSizes.delete(size): newSizes.add(size)
+        newSizes.has(size) ? newSizes.delete(size) : newSizes.add(size)
         setValue('sizes', Array.from(newSizes))
     }
 
     const onSubmit = async (data: FormInputs) => {
-        console.log(data)
+        const formData = new FormData()
+
+        const { ...productToSave } = data
+
+        if ( product?.id) 
+            formData.append('id', product?.id ?? '')
+        formData.append('title', productToSave.title)
+        formData.append('slug', productToSave.slug)
+        formData.append('description', productToSave.description)
+        formData.append('price', productToSave.price.toString())
+        formData.append('inStock', productToSave.inStock.toString())
+        formData.append('sizes', productToSave.sizes.toString())
+        formData.append('tags', productToSave.tags.toString())
+        formData.append('categoryId', productToSave.categoryId)
+        formData.append('gender', productToSave.gender)
+
+        const resp = await createUpdateProduct(formData)
+
+        console.log(resp.success? 'OK': resp.message)
     }
 
     return (
@@ -128,7 +145,7 @@ export const ProductForm = ({ product, data }: Props) => {
                     <span>Gender</span>
                     <Select
                         id="gender"
-                        data={dataApp.gender}
+                        data={dataApp.genders()}
                         register={register}
                     />
                 </div>
@@ -150,6 +167,17 @@ export const ProductForm = ({ product, data }: Props) => {
 
             {/* Selector de tallas y fotos */}
             <div className="w-full">
+
+                {/* Stock */}
+                <div className="flex flex-col mb-2">
+                    <span>Inventario</span>
+                    <input
+                        type="number"
+                        className="p-2 border rounded-md bg-gray-200"
+                        {...register('inStock', { required: true, min: 0 })}
+                    />
+                </div>
+
                 {/* As checkboxes */}
                 <div className="flex flex-col">
 

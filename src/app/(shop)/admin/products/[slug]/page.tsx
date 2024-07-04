@@ -4,6 +4,7 @@ import { ProductMain } from "@/components/admin/product/ProductMain"
 import { IDataSelect } from "@/interfaces/app/data-select.interface"
 import { ICategory } from "@/interfaces/category.interface"
 import { IProduct } from "@/interfaces/product.interface"
+import { redirect } from "next/navigation"
 
 interface Props {
     params: {
@@ -27,7 +28,11 @@ export default async function AdminProductPage({ params }: Props) {
             label: item.name
         }
     ))
-    const product = (respProduct.success && respProduct.data)? respProduct.data as IProduct : null
+
+    if ( !respProduct.success || (!respProduct.data && slug != 'new'))
+        redirect('/admin/products')
+
+    const product = (respProduct.data)? respProduct.data as IProduct : null
 
 
     return (

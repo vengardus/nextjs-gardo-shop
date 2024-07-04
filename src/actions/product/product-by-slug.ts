@@ -1,7 +1,6 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { type IProduct } from "@/interfaces/product.interface";
 import { IResponseAction } from "@/interfaces/app/response.interface";
 import { initResponseAction } from "@/utils/initResponseAction";
 import { getActionError } from "@/utils/getActionError";

@@ -1,11 +1,5 @@
 import { Gender } from "@/interfaces/product.interface";
-
-export const labelGender: Record<Gender, string> = {
-    men: "hombres",
-    women: "mujeres",
-    kid: "niños",
-    unisex: "todos",
-};
+import { toCapitalize } from "@/utils/toCapitalize";
 
 export const APP_CONST = {
     igv: 18,
@@ -18,7 +12,7 @@ export const APP_CONST = {
         unAuthorized: 403,
     },
     pagination: {
-        take: 7,
+        take: 6,
         max_page_for_view: 7,
     },
     metaModel: {
@@ -48,22 +42,45 @@ export const dataApp = {
             label: "Usuario",
         },
     ],
-    gender: [
-        {
-            value:'men',
-            label:'Men'
-        },
-        {
-            value:'women',
-            label:'Women'
-        },
-        {
-            value:'kid',
-            label:'Kid'
-        },
-        {
-            value:'unisex',
-            label:'Unusex'
-        },
-    ]
+    // gender: [
+    //     {
+    //         value:'men',
+    //         label:'Men'
+    //     },
+    //     {
+    //         value:'women',
+    //         label:'Women'
+    //     },
+    //     {
+    //         value:'kid',
+    //         label:'Kid'
+    //     },
+    //     {
+    //         value:'unisex',
+    //         label:'Unisex'
+    //     },
+    // ],
+    genders: ():{value:string, label:string}[] => {
+        let lista = []
+        for (const key in enumGender) {
+            lista.push({value:key, label:toCapitalize(key)})
+        }
+        return lista
+    }
 };
+
+// Gender
+export enum enumGender {
+    men = "men",
+    women ="women",
+    kid = "kid",
+    unisex = "unisex",
+}
+
+export const labelGender: Record<Gender, string> = {
+    men: "hombres",
+    women: "mujeres",
+    kid: "niños",
+    unisex: "todos",
+};
+

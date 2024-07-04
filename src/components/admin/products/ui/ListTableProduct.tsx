@@ -15,6 +15,7 @@ import { currencyFormat } from "@/utils/currencyFormat"
 import type { IProduct } from "@/interfaces/product.interface"
 import type { IDataTableColumn } from "@/interfaces/app/table.interface"
 import type { IMetaModel } from "@/interfaces/app/metamodel.interface"
+import { ProductImage } from "@/components/product/product-image/ProductImage"
 
 
 interface Props {
@@ -36,17 +37,18 @@ export const ListTableProduct = ({ data, metaModel }: Props) => {
         {
             value: (item) => (
                 <Link href={`/admin/products/${item.slug}`} >
-                    <Image
-                        src={`/products/${item.images[0]}`}
+                    <ProductImage
+                        src={item.images[0]}
                         alt={item.title}
-                        width={100}
-                        height={100}
+                        width={80}
+                        height={80}
+                        className="w-20 h-20 object-cover rounded"
                     />
                 </Link>
             )
         },
         {
-            value: (item) => <span>{item.title}</span>
+            value: (item) => <span>{item.title}-{item.images.length}</span>
         },
         {
             value: (item) => <span className="font-bold">{currencyFormat(item.price)}</span>
