@@ -2,6 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import clsx from "clsx";
 
 import { Select } from "@/components/ui/select/Select";
@@ -32,9 +33,11 @@ interface FormInputs {
     categoryId: string
 
     // todo: Images
+    images?: FileList
 }
 
 export const ProductForm = ({ product, data }: Props) => {
+    const router = useRouter()
     const { dataSelectCategories } = data
     const {
         register,
@@ -48,13 +51,14 @@ export const ProductForm = ({ product, data }: Props) => {
             ...product,
             sizes: product?.sizes ?? [],
             tags: product?.tags,
-            categoryId: product?.category_id
+            categoryId: product?.category_id,
 
             // toto: Images
+            images: undefined
         }
     })
 
-    // refrescar values useForm si cambia sizes
+    // refresh values useForm si cambia sizes
     watch('sizes')
 
     const onCategoryChanged = (value: string) => {
@@ -70,9 +74,9 @@ export const ProductForm = ({ product, data }: Props) => {
     const onSubmit = async (data: FormInputs) => {
         const formData = new FormData()
 
-        const { ...productToSave } = data
+        const { images, ...productToSave } = data
 
-        if ( product?.id) 
+        if (product?.id)
             formData.append('id', product?.id ?? '')
         formData.append('title', productToSave.title)
         formData.append('slug', productToSave.slug)
@@ -84,9 +88,25 @@ export const ProductForm = ({ product, data }: Props) => {
         formData.append('categoryId', productToSave.categoryId)
         formData.append('gender', productToSave.gender)
 
+        if (images) {
+            for (let i=0; i < images.length; i++) {
+                formData.append('images', images[i])
+            }
+        }
+        formData
+
         const resp = await createUpdateProduct(formData)
 
-        console.log(resp.success? 'OK': resp.message)
+        console.log(resp)
+
+        console.log(images)
+
+        if (!resp.success) {
+            alert(`No se pudo actuaizar producto: ${resp.message}`)
+            return
+        }
+
+        router.replace(`/admin/products/${(resp.data.product as IProduct)?.slug}`)
     }
 
     return (
@@ -213,6 +233,7 @@ export const ProductForm = ({ product, data }: Props) => {
                             multiple
                             className="p-2 border rounded-md bg-gray-200"
                             accept="image/png, image/jpeg"
+                            {...register('images')}
                         />
 
                     </div>

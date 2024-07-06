@@ -36,7 +36,7 @@ export const ListTableProduct = ({ data, metaModel }: Props) => {
     const columns: IDataTableColumn<IProduct>[] = [
         {
             value: (item) => (
-                <Link href={`/admin/products/${item.slug}`} >
+                <Link href={`/product/${item.slug}`} >
                     <ProductImage
                         src={item.images[0]}
                         alt={item.title}
@@ -48,7 +48,11 @@ export const ListTableProduct = ({ data, metaModel }: Props) => {
             )
         },
         {
-            value: (item) => <span>{item.title}-{item.images.length}</span>
+            value: (item) => (
+                <Link href={`/admin/products/${item.slug}`} >
+                    <span className="underline hover:text-blue-700">{item.title}</span>
+                </Link>
+            )
         },
         {
             value: (item) => <span className="font-bold">{currencyFormat(item.price)}</span>

@@ -1,19 +1,23 @@
 import Image from "next/image"
 
 interface Props {
-    src?: string 
+    src?: string
     alt: string
-    className: React.StyleHTMLAttributes<HTMLImageElement>['className']
+    className?: React.StyleHTMLAttributes<HTMLImageElement>['className']
+    style?: React.StyleHTMLAttributes<HTMLImageElement>['style']
     width: number
     height: number
+    priority?: boolean
 }
 
 export const ProductImage = ({
     src,
     alt,
     className,
+    style,
     width,
     height,
+    priority=false
 }: Props) => {
 
     const customSrc = (src)
@@ -28,7 +32,9 @@ export const ProductImage = ({
             alt={alt}
             width={width}
             height={height}
-            className={className}
+            className={className ?? ''}
+            style={style ?? {}}
+            priority={priority}
         />
     )
 }

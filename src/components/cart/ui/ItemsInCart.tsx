@@ -8,6 +8,7 @@ import { ICartProduct, Size } from "@/interfaces/product.interface"
 import { useCartStore } from "@/store/cart/cart.store"
 import { redirect } from "next/navigation"
 import { currencyFormat } from "@/utils/currencyFormat"
+import { ProductImage } from "@/components/product/product-image/ProductImage"
 
 
 export const ItemsInCart = () => {
@@ -37,8 +38,8 @@ export const ItemsInCart = () => {
             {
                 productsInCart.map(item => (
                     <div key={`${item.slug}-${item.size}`} className="flex mb-3 gap-3">
-                        <Image
-                            src={`/products/${item.image}`}
+                        <ProductImage
+                            src={item.image}
                             width={100}
                             height={100}
                             alt={item.title}
