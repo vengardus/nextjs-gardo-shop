@@ -69,7 +69,17 @@ export const dataApp = {
             lista.push({value:key, label:toCapitalize(key)})
         }
         return lista
-    }
+    },
+
+    imagesLCPToPriority : [
+        '7654399-00-A_0_2000.jpg',
+        'kqpert65eywhz98uratm.webp',
+        '8529354-00-A_0_2000.jpg',
+        '1740250-00-A_0_2000.jpg',
+        '7652410-00-A_0.jpg',
+        '1473809-00-A_1_2000.jpg',
+        '9877040-00-A_0_2000.jpg'
+    ]
 };
 
 // Gender
