@@ -27,7 +27,7 @@ export const ProductsGridItem = ({ product }: Props) => {
                     width={550}
                     height={550}
                     // Todo: priority={true}
-                    priority={dataApp.imagesLCPToPriority.some(image => displayImage.includes(image)) ? true : false}
+                    //priority={dataApp.imagesLCPToPriority.some(image => displayImage.includes(image)) ? true : false}
                     onMouseEnter={() => {
                         if (product.images[1])
                             setDisplayImage(product.images[1])
@@ -36,7 +36,7 @@ export const ProductsGridItem = ({ product }: Props) => {
                 />
 
                 <div className="p-4 flex flex-col">
-                    {product.title}-{displayImage}
+                    {product.title}
                     <span className="font-bold">{currencyFormat(product.price)}</span>
                 </div>
             </Link>

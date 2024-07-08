@@ -5,6 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { useCartStore } from "@/store/cart/cart.store"
 import { currencyFormat } from "@/utils/currencyFormat"
+import { ProductImage } from "@/components/product/product-image/ProductImage"
 
 export const CheckOutItems = () => {
     const glosaTitle = 'Ajustar elementos'
@@ -34,8 +35,8 @@ export const CheckOutItems = () => {
             {
                 productsInCart.map(item => (
                     <div key={`${item.slug}-${item.size}`} className="flex mb-3 gap-3">
-                        <Image
-                            src={`/products/${item.image}`}
+                        <ProductImage
+                            src={item.image}
                             width={100}
                             height={100}
                             alt={item.title}

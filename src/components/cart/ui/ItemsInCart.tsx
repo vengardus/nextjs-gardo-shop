@@ -48,7 +48,6 @@ export const ItemsInCart = () => {
                                 width: "100px",
                                 height: "100px"
                             }}
-                            priority={['1742702-00-A_0_2000.jpg'].includes(item.image) ? true : false}
                         />
 
                         <div className="">

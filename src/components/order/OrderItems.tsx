@@ -4,6 +4,7 @@ import { ISeedProduct } from "@/seed/seed"
 import { ICartProduct } from "@/interfaces/product.interface"
 import { currencyFormat } from "@/utils/currencyFormat"
 import { IOrderItem } from "@/interfaces/order.interface"
+import { ProductImage } from "../product/product-image/ProductImage"
 
 
 interface Props {
@@ -28,8 +29,8 @@ export const OrderItems = ({ items }: Props) => {
             {
                 items.map(item => (
                     <div key={`${item.product.slug}-${item.size}`} className="flex mb-3 gap-3">
-                        <Image
-                            src={`/products/${item.product.ProductImage[0].url}`}
+                        <ProductImage
+                            src={item.product.ProductImage[0].url}
                             width={100}
                             height={100}
                             alt={item.product.title}
