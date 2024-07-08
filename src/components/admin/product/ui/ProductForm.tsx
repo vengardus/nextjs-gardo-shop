@@ -10,6 +10,8 @@ import { createUpdateProduct } from "@/actions/product/create-update-product";
 import { dataApp } from "@/config/configApp";
 import type { IDataSelect } from "@/interfaces/app/data-select.interface";
 import type { Gender, IProduct, Size } from "@/interfaces/product.interface";
+import { ProductImage } from "@/components/product/product-image/ProductImage";
+import { deleteProductImage } from "@/actions/product/delete-product-image";
 
 interface Props {
     product: IProduct | null;
@@ -71,6 +73,12 @@ export const ProductForm = ({ product, data }: Props) => {
         setValue('sizes', Array.from(newSizes))
     }
 
+    const onDeleteImage = async (imageId:number, imageUrl:string) => {
+        console.log('delete', imageId, imageUrl)
+        const resp = await deleteProductImage(imageId, imageUrl)
+        console.log(resp)
+    }
+
     const onSubmit = async (data: FormInputs) => {
         const formData = new FormData()
 
@@ -96,10 +104,6 @@ export const ProductForm = ({ product, data }: Props) => {
         formData
 
         const resp = await createUpdateProduct(formData)
-
-        console.log(resp)
-
-        console.log(images)
 
         if (!resp.success) {
             alert(`No se pudo actuaizar producto: ${resp.message}`)
@@ -242,8 +246,8 @@ export const ProductForm = ({ product, data }: Props) => {
                         {
                             product?.ProductImage.map(image => (
                                 <div key={image.id}>
-                                    <Image
-                                        src={`/products/${image.url}`}
+                                    <ProductImage
+                                        src={image.url}
                                         alt={product.title}
                                         width={300}
                                         height={300}
@@ -252,7 +256,7 @@ export const ProductForm = ({ product, data }: Props) => {
 
                                     <button
                                         type="button"
-                                        onClick={() => console.log(image.id, image.url)}
+                                        onClick={() => onDeleteImage(image.id!, image.url)}
                                         className="btn-danger w-full rounded"
                                     >
                                         Eliminar

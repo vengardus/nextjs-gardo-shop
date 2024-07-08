@@ -33,7 +33,7 @@ export const ProductImage = ({
             width={width}
             height={height}
             className={className ?? ''}
-            style={style ?? {}}
+            style={style ?? {width:'auto', height:'auto'}}
             priority={priority}
         />
     )

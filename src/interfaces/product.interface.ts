@@ -18,7 +18,7 @@ export interface IProduct {
 export interface IProductImage {
     id?: number,
     url: string,
-    product_id?: string
+    product_id: string
 }
 
 export interface ICartProduct {

@@ -29,6 +29,9 @@ export const APP_CONST = {
             verboseNamePlural: "ordenes",
         },
     },
+    cloudinary: {
+        pathProducts: 'gardo-shop/products/'
+    }
 };
 
 export const dataApp = {

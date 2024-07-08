@@ -8,7 +8,7 @@ import { enumGender } from "@/config/configApp";
 import { initResponseAction } from "@/utils/initResponseAction";
 import { getActionError } from "@/utils/getActionError";
 import { IResponseAction } from "@/interfaces/app/response.interface";
-import { Size } from "@/interfaces/product.interface";
+import { IProduct, IProductImage, Size } from "@/interfaces/product.interface";
 
 // Configuration Cloudinary
 cloudinary.config(process.env.CLOUDINARY_URL ?? "");
@@ -75,7 +75,7 @@ export const createUpdateProduct = async (
                     },
                 });
 
-                console.log({ updateProduct: product });
+                // console.log({ updateProduct: product });
             } else {
                 // Crear
                 product = await prisma.product.create({
@@ -96,10 +96,25 @@ export const createUpdateProduct = async (
             // 2.2 Proceso de carga y guardado de imagenes
             if (formData.getAll("images")) {
                 // [ 'https://url.x.jpg', 'https;//url/y.jpg' ]
-                const images = await uploadImages(
+                const respImages = await uploadImages(
                     formData.getAll("images") as File[]
                 );
-                console.log({ images: images });
+
+                
+                // 2.2.1 Grabar imagenes en BD
+                if (!respImages.success || !respImages.data) throw new Error(resp.message);
+
+                
+                const images = respImages.data!;
+                await prisma.productImage.createMany({
+                    data: images.map(
+                        (image) =>
+                            ({
+                                url: image!,
+                                product_id: (product as IProduct).id,
+                            } as IProductImage)
+                    ),
+                });
             }
 
             return {
@@ -121,7 +136,23 @@ export const createUpdateProduct = async (
     return resp;
 };
 
-const uploadImages = async (images: File[]) => {
+const uploadImages = async (
+    images: File[]
+): Promise<{
+    success: boolean;
+    data: (string | null)[] | null;
+    message?: string;
+}> => {
+    const resp: {
+        success: boolean;
+        data: (string | null)[] | null;
+        message?: string;
+    } = {
+        success: false,
+        data: null,
+        message: "",
+    };
+
     try {
         const uploadPromises = images.map(async (image) => {
             try {
@@ -133,17 +164,32 @@ const uploadImages = async (images: File[]) => {
                         folder: "gardo-shop/products",
                     })
                     .then((r) => r.secure_url);
+                // .catch((error)=>{
+                //     console.log('Error subiendo imagen', index,error)
+                //     return null
+                // });
             } catch (error) {
-                console.log(error);
+                //console.log('Error procesando imagen', index)
                 return null;
             }
         });
 
+        // si ocurrió un error en el uploaPromise, el Promise.all emviara al catch externo
         const uploadImages = await Promise.all(uploadPromises);
 
-        return uploadImages;
+        /*
+        const uploadImagesNotNull = uploadImages.filter(image => image != null)
+        console.log( {
+            images: uploadImages,
+            imagesNotNulls: uploadImagesNotNull
+        })
+        */
+
+        resp.success = true;
+        resp.data = uploadImages;
     } catch (error) {
-        console.log(error);
-        return null;
+        resp.message = getActionError(error);
     }
+
+    return resp;
 };
