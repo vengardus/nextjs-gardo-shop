@@ -3,7 +3,6 @@ import "@/app/globals.css";
 import { TopMenu } from "@/components/ui/top-menu/TopMenu";
 import { Sidebar } from "@/components/ui/sidebar/Sidebar";
 import { Footer } from "@/components/ui/footer/Footer";
-import { inter } from "@/config/fonts";
 
 
 export const metadata: Metadata = {
@@ -20,17 +19,17 @@ export default function ShopLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body className={inter.className}>
+        // <html lang="en">
+        //     <body className={inter.className}>
                 <main className="bg-slat1e-700 min-h-screen">
                     <TopMenu />
                     <Sidebar />
-                    <div className="px-0 sm:px-7">
+                    <div className="px-0 sm:px-7 mt-24 sm:mt-20 py-2 sm:py-0 z-40">
                         {children}
                     </div>
                     <Footer />
                 </main>
-            </body>
-        </html>
+        //     </body>
+        // </html>
     );
 }

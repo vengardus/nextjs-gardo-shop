@@ -57,7 +57,7 @@ export const ItemsInCart = () => {
                             >
                                 {item.size} - {item.title}
                             </Link>
-                            <p>S/. {currencyFormat(item.price)}</p>
+                            <p>{currencyFormat(item.price)}</p>
                             <QuantitySelector
                                 quantity={item.quantity}
                                 onQuantityChanged={(quantity) => onQuantityChanged(item, quantity)}

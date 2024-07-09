@@ -42,7 +42,8 @@ export const ListTableProduct = ({ data, metaModel }: Props) => {
                         alt={item.title}
                         width={80}
                         height={80}
-                        className="w-20 h-20 object-cover rounded"
+                        className="w-auto h-auto sm:w-[67%] md:w-[67%] lg:w-[23.33%] object-cover rounded"
+                        //style={{width:'100%', height:'auto'}}
                     />
                 </Link>
             )

@@ -25,6 +25,7 @@ body {
             rgb(var(--background-start-rgb))
         )
         rgb(var(--background-end-rgb));
+    @apply mx-1 sm:mx-0 my-0 p-0;
 }
 
 @keyframes fadeIn {

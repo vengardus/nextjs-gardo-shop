@@ -1,5 +1,5 @@
 export default function LoadinngPage() {
     return (
-        <h2>Loading 2222...</h2>
+        <h2>Loading...</h2>
     )
 }

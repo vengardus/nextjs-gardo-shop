@@ -41,9 +41,9 @@ export const OrderItems = ({ items }: Props) => {
                             }}
                         />
 
-                        <div className="">
+                        <div className="w-2/3">
                             <p>{item.product.title}</p>
-                            <p>S/. {currencyFormat(item.price)} x {item.quantity}</p>
+                            <p>{currencyFormat(item.price)} x {item.quantity}</p>
                             <p className="font-bold">Subtotal: ${currencyFormat(item.price * item.quantity)}</p>
                             <div className="underline mt-3">
                                 Remover

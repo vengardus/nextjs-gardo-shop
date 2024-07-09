@@ -4,6 +4,7 @@ import { titleFont } from "@/config/fonts"
 import { IProduct } from "@/interfaces/product.interface"
 import { StockLabel } from "../stock-label/StockLabel"
 import { AddToCart } from "../ui/AddToCart"
+import { currencyFormat } from "@/utils/currencyFormat"
 
 
 interface Props {
@@ -21,7 +22,7 @@ export const ProductDetail = ({ product }: Props) => {
                 {product.title}
             </h1>
 
-            <p className="text-xl mb-5">S/. {product.price}</p>
+            <p className="text-xl mb-5">{currencyFormat(product.price)}</p>
 
             <AddToCart product={product}/>
 

@@ -47,10 +47,10 @@ export const CheckOutItems = () => {
                             }}
                         />
 
-                        <div className="">
+                        <div className="w-2/3">
                             <p>{item.title}</p>
                             <p>{currencyFormat(item.price)} x {item.quantity}</p>
-                            <p className="font-bold">Subtotal: ${currencyFormat(item.price * item.quantity)}</p>
+                            <p className="font-bold">Subtotal: {currencyFormat(item.price * item.quantity)}</p>
                             {/* <div className="underline mt-3">
                                 Remover
                             </div> */}

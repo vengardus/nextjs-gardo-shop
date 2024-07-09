@@ -43,16 +43,19 @@ export const ProductImage = ({
 
 
     return (
+        <div className={className} style={{ ...style}}>
         <Image
             src={customSrc}
             alt={alt}
+            //layout="responsive"
             width={width}
             height={height}
-            className={className ?? ''}
-            style={style ?? { width: 'auto', height: 'auto' }}
+            //className={className ?? ''}
+            //style={style ?? { width: 'auto', height: 'auto' }}
             priority={isPriority}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
         />
+        </div>
     )
 }
