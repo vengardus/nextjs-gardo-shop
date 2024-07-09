@@ -43,6 +43,7 @@ export const getAllProductsWithImages = async (
                     take: 2,
                     select: {
                         url: true,
+                        product_id: true
                     },
                 },
             },

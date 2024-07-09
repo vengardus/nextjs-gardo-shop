@@ -3,12 +3,11 @@
 import { IResponseAction } from "@/interfaces/app/response.interface"
 import prisma from "@/lib/prisma"
 import { getActionError } from "@/utils/getActionError"
+import { initResponseAction } from "@/utils/initResponseAction"
 
 
 export const setTransactionId = async(transactionId:string, orderId:string):Promise<IResponseAction> => {
-    const resp:IResponseAction = {
-        success:false,
-    }
+    const resp = initResponseAction()
 
     try {
         const order = await prisma.order.update({

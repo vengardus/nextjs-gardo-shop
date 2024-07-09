@@ -2,6 +2,8 @@
 
 import { IResponseAction } from "@/interfaces/app/response.interface";
 import prisma from "@/lib/prisma";
+import { getActionError } from "@/utils/getActionError";
+import { initResponseAction } from "@/utils/initResponseAction";
 import bcryptjs from "bcryptjs";
 
 export const registerUser = async (
@@ -9,6 +11,8 @@ export const registerUser = async (
     email: string,
     password: string
 ):Promise<IResponseAction> => {
+    const resp = initResponseAction()
+
     try {
         const user = await prisma.user.create({
             data: {
@@ -23,17 +27,14 @@ export const registerUser = async (
             }
         });
 
-        return {
-            success: true,
-            data: user
-        }
+        resp.success = true,
+        resp.data = user
 
     } catch (error) {
-        console.log(error);
+        //console.log(error);
 
-        return {
-            success: false,
-            message: "No se pudo crear el usuario.",
-        };
+        resp.message = `No se pudo crear el usuario: ${getActionError(error)}}`
     }
+
+    return resp
 };

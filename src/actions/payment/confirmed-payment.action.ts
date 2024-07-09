@@ -3,14 +3,13 @@
 import { IResponseAction } from "@/interfaces/app/response.interface";
 import prisma from "@/lib/prisma";
 import { getActionError } from "@/utils/getActionError";
+import { initResponseAction } from "@/utils/initResponseAction";
 import { revalidatePath } from "next/cache";
 
 export const confirmedPayment = async (
     orderId: string
 ): Promise<IResponseAction> => {
-    const resp: IResponseAction = {
-        success: false,
-    };
+    const resp = initResponseAction()
 
     try {
         const order = await prisma.order.update({

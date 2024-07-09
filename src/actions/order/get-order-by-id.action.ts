@@ -5,13 +5,12 @@ import { APP_CONST } from "@/config/configApp";
 import { IResponseAction } from "@/interfaces/app/response.interface";
 import prisma from "@/lib/prisma";
 import { getActionError } from "@/utils/getActionError";
+import { initResponseAction } from "@/utils/initResponseAction";
 
 export const getOrderById = async (
     orderId: string
 ): Promise<IResponseAction> => {
-    const resp: IResponseAction = {
-        success: false,
-    };
+    const resp = initResponseAction()
     
     try {
         const session = await auth()

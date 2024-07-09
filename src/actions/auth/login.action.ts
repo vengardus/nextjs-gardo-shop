@@ -2,6 +2,8 @@
 
 import { signIn } from "@/auth";
 import { IResponseAction } from "@/interfaces/app/response.interface";
+import { getActionError } from "@/utils/getActionError";
+import { initResponseAction } from "@/utils/initResponseAction";
 
 
 export async function authenticate(
@@ -25,6 +27,8 @@ export async function authenticate(
 
 
 export const login = async (email:string, password:string):Promise<IResponseAction> => {
+    const resp = initResponseAction()
+
     try {
         await signIn("credentials", {
             email,
@@ -32,14 +36,11 @@ export const login = async (email:string, password:string):Promise<IResponseActi
             redirect:false
         } );
 
-        return {
-            success:true
-        }
-    } catch (error) {
-        console.log('Error:', error)
-        return {
-            success:false,
-            message:"No se pudo iniciar sesión"
-        }
+        resp.success = true
+    } 
+    catch (error) {
+        resp.message = `No se pudo iniciar sesión: ${getActionError(error)}`
     }
+
+    return resp
 }

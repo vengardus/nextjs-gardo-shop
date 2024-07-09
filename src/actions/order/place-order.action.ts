@@ -6,6 +6,7 @@ import { APP_CONST } from "@/config/configApp";
 import type { IAddress } from "@/interfaces/address.interface";
 import type { Size } from "@/interfaces/product.interface";
 import type { IResponseAction } from "@/interfaces/app/response.interface";
+import { initResponseAction } from "@/utils/initResponseAction";
 
 export interface IProductToOrder {
     product_id: string;
@@ -17,12 +18,7 @@ export const placeOrder = async (
     productsToOrder: IProductToOrder[],
     address: IAddress
 ): Promise<IResponseAction> => {
-    const resp: IResponseAction = {
-        success: false,
-        message: "",
-        data: null,
-    };
-
+    const resp = initResponseAction()
     try {
         // 0. Verificar usuario
         const session = await auth();

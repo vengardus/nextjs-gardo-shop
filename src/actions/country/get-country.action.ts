@@ -2,9 +2,13 @@
 
 import prisma from "@/lib/prisma";
 import type { IResponseAction } from "@/interfaces/app/response.interface";
+import { initResponseAction } from "@/utils/initResponseAction";
+import { getActionError } from "@/utils/getActionError";
 
 
 export const getCountryAll = async ():Promise<IResponseAction> => {
+    const resp = initResponseAction()
+
     try {
         const countries = await prisma.country.findMany({
             orderBy: {
@@ -12,16 +16,13 @@ export const getCountryAll = async ():Promise<IResponseAction> => {
             }
         });
 
-        return {
-            success: true,
-            data: countries,
-        };
+        resp.success = true
+        resp.data = countries
     } catch (error) {
-        console.error(error);
+        //console.error(error);
 
-        return {
-            success: false,
-            message: "Error al recuperar countries",
-        };
+        resp.message = `Error al recuperar countries: ${getActionError(error)}`
     }
+
+    return resp
 };
