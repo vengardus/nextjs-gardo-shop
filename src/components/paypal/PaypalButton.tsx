@@ -2,9 +2,7 @@
 
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
 import { CreateOrderData, CreateOrderActions, OnApproveData, OnApproveActions } from '@paypal/paypal-js'
-import { setTransactionId } from '@/actions/payment/set-transaction-id.action'
-import { paypalCheckPayment } from '@/actions/payment/paypal-check-payment.action'
-import { confirmedPayment } from '@/actions/payment/confirmed-payment.action'
+import { confirmedPayment, paypalCheckPayment, setTransactionId } from '@/actions'
 
 
 interface Props {
@@ -14,11 +12,13 @@ interface Props {
 
 export const PaypalButton = ({ amount, orderId }: Props) => {
     const [{ isPending }] = usePayPalScriptReducer();
-    const roundAmount = Math.round(amount * 100) / 100
+    const roundAmount = Math.round(amount * 100) / 100 
+
+    console.log(roundAmount)
 
     const createOrder = async (data: CreateOrderData, actions: CreateOrderActions): Promise<string> => {
 
-        /*TODO: comentado hasta solucionar la creaccion de mi cuenta paypal
+        // TODO: comentado hasta solucionar la creaccion de mi cuenta paypal
         const transactionId = await actions.order.create({
             intent: 'CAPTURE',
             purchase_units: [
@@ -31,23 +31,14 @@ export const PaypalButton = ({ amount, orderId }: Props) => {
                 }
             ]
         })
-        */
-        const transactionId = `PAYPAL-${orderId}`   //TODO: por ahora
+
+        console.log(transactionId)
+        //return transactionId
+        //const transactionId = `PAYPAL-${orderId}`   //TODO: por ahora
 
         const resp = await setTransactionId(transactionId, orderId)
         if (!resp.success) throw new Error(resp.message)
 
-
-        // TODO: esto debe de ir en el server action paypalCheckPayment, elcual es llamado desde un evento de 
-        // transaccion aprovada de Paypal (onApprove)
-
-        const confirmedPaid = await confirmedPayment(orderId)
-        if (!confirmedPaid.success) throw new Error(resp.message)
-
-        
-
-
-        
         return transactionId
     }
 
@@ -58,19 +49,20 @@ export const PaypalButton = ({ amount, orderId }: Props) => {
         await paypalCheckPayment(details.id)
     }
 
-
-    return (
-        !isPending
-            ?
-            <PayPalButtons
-                createOrder={createOrder}
-                onApprove={onApprove}
-            />
-            :
+    if (isPending) {
+        return (
             <div className='animate-pulse mb-16'>
                 <div className='h-11 bg-gray-300 rounded'></div>
                 <div className='h-11 bg-gray-300 rounded mt-2'></div>
             </div>
+        )
+    }
+
+    return (
+        <PayPalButtons
+            createOrder={createOrder}
+            onApprove={onApprove}
+        />
     )
 }
 
