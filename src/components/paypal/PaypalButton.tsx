@@ -46,7 +46,8 @@ export const PaypalButton = ({ amount, orderId }: Props) => {
         const details = await actions.order?.capture()
         if (!details || !details.id) return
 
-        await paypalCheckPayment(details.id)
+        const resp = await paypalCheckPayment(details.id)
+        console.log({resp})
     }
 
     if (isPending) {
