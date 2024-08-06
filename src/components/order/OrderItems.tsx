@@ -1,9 +1,6 @@
 import Link from "next/link"
-import Image from "next/image"
-import { ISeedProduct } from "@/seed/seed"
-import { ICartProduct } from "@/interfaces/product.interface"
-import { currencyFormat } from "@/utils/currencyFormat"
-import { IOrderItem } from "@/interfaces/order.interface"
+import { currencyFormat } from "@/utils"
+import type { IOrderItem } from "@/interfaces"
 import { ProductImage } from "../product/product-image/ProductImage"
 
 

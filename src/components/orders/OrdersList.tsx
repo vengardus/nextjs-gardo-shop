@@ -1,8 +1,7 @@
+import { APP_CONST } from '@/config';
+import { IOrder } from '@/interfaces';
 import { Pagination } from '@/components/ui/pagination/Pagination';
 import { ListHeader } from '@/components/ui/list-view/list-header/ListHeader';
-
-import { APP_CONST } from '@/config/configApp';
-import type { IOrder } from '@/interfaces/order.interface';
 import { ListTableOrder } from './ListTableOrder';
 
 interface Props {

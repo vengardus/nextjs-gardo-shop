@@ -1,7 +1,8 @@
-import type { IOrder } from "@/interfaces/order.interface"
-import { OrderMapper } from "@/mapper/order.mapper"
-import { currencyFormat } from "@/utils/currencyFormat"
-import { APP_CONST } from "@/config/configApp"
+
+import { APP_CONST } from "@/config"
+import { currencyFormat } from "@/utils"
+import type { IOrder } from "@/interfaces"
+import { OrderMapper } from "@/mapper"
 import { PaypalButton } from "../paypal/PaypalButton"
 import { OrderPaidMessage } from "./OrderPaidMessage"
 
