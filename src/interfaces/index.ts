@@ -1,4 +1,13 @@
+export * from "./app/data-select.interface"
+export * from "./app/metamodel.interface"
+export * from "./app/pagination.interface"
 export * from "./app/response.interface"
+export * from "./app/table.interface"
 
+export * from "./address.interface"
+export * from "./category.interface"
+export * from "./country.interface"
+export * from "./order.interface"
 export * from "./paypal.interface"
-
+export * from "./product.interface"
+export * from "./user.interface"

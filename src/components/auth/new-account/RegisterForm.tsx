@@ -6,8 +6,6 @@ import Link from "next/link"
 import clsx from "clsx"
 import { login, registerUser } from "@/actions"
 
-
-
 type FormInputs = {
     name: string,
     email: string,
@@ -45,7 +43,7 @@ export const RegisterForm = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col"
         >
-            <label htmlFor="email">Nombre completo</label>
+            <label htmlFor="name">Nombre completo</label>
             <input
                 className={
                     clsx(
@@ -75,7 +73,7 @@ export const RegisterForm = () => {
             />
 
 
-            <label htmlFor="email">Contraseña</label>
+            <label htmlFor="password">Contraseña</label>
             <input
                 className={
                     clsx(

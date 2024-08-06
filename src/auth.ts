@@ -4,8 +4,9 @@ import GitHub from "next-auth/providers/github";
 //import Google from "next-auth/providers/google"
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
-import bcryptjs from "bcryptjs";
 import prisma from "./lib/prisma";
+import { cryptoCompareSync } from "./lib";
+
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
     providers: [
@@ -35,7 +36,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                     if (!user) return null;
 
                     // comparar las contraeñas
-                    if (!bcryptjs.compareSync(password, user.password))
+                    if (!cryptoCompareSync(password, user.password))
                         return null;
 
                     // regresar el usuario (sin el password)
@@ -61,7 +62,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
     callbacks: {
         authorized({ auth, request: { nextUrl } }) {
-            console.log('AUTH', auth)
+            console.log("AUTH", auth);
             // const isLoggedIn = !!auth?.user;
             // const isOnDashboard = nextUrl.pathname.startsWith("/dashboard");
             // if (isOnDashboard) {
