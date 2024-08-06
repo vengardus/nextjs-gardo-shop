@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
+import { ProductMain } from "@/components"
 import type { ICategory, IDataSelect, IProduct } from "@/interfaces"
 import { getAllCategory, getProductBySlug } from "@/actions"
-import { ProductMain } from "@/components"
 
 
 interface Props {

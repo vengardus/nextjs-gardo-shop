@@ -1,9 +1,9 @@
-import { Pagination } from '@/components/ui/pagination/Pagination';
-import { ListTableProduct } from '@/components/admin/products/ui/ListTableProduct';
-
-import { APP_CONST } from '@/config/configApp';
-import type { IProduct } from '@/interfaces/product.interface';
+import { APP_CONST } from '@/config';
+import type { IProduct } from '@/interfaces';
 import { ProductListHeader } from './ui/ProductListHeader';
+import { ListTableProduct } from './ui/ListTableProduct';
+import { Pagination } from '@/components/ui/pagination/Pagination';
+
 
 interface Props {
     data: IProduct[]

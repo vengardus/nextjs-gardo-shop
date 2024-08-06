@@ -1,7 +1,6 @@
 import { Title } from "@/components/ui/title/Title"
 import { ProductForm } from "./ui/ProductForm"
-import type { IDataSelect } from "@/interfaces/app/data-select.interface"
-import type { IProduct } from "@/interfaces/product.interface"
+import { IDataSelect, IProduct } from "@/interfaces"
 
 interface Props {
     slug: string

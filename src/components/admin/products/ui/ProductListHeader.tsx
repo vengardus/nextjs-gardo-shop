@@ -1,8 +1,8 @@
 "use client"
 
-import { ListHeader } from "@/components/ui/list-view/list-header/ListHeader"
-import { IMetaModel } from "@/interfaces/app/metamodel.interface"
 import { useRouter } from "next/navigation"
+import type { IMetaModel } from "@/interfaces"
+import { ListHeader } from "@/components/ui/list-view/list-header/ListHeader"
 
 interface Props {
     model: IMetaModel

@@ -1,7 +1,7 @@
 import { getValidNumber } from "@/utils";
-import { getAllProductsWithImages } from "@/actions";
-import type { IProduct } from "@/interfaces";
 import { PageNotFound, ProductsList } from "@/components";
+import type { IProduct } from "@/interfaces";
+import { getAllProductsWithImages } from "@/actions";
 
 interface Props {
     searchParams: {

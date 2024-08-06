@@ -1,20 +1,15 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
 
+import { currencyFormat, setColumnHeader } from "@/utils"
+import type { IDataTableColumn, IMetaModel, IProduct } from "@/interfaces"
 import { HeaderTable } from "@/components/ui/table/HeaderTable"
 import { DataTable } from "@/components/ui/table/DataTable"
 import { ListTable } from "@/components/ui/table/ListTable"
 import { MessageDatEmpty } from "@/components/ui/table/MessageDatEmpty"
 import { MessageError } from "@/components/ui/table/MessageError"
-
-import { setColumnHeader } from "@/utils/setColumnHeader"
-import { currencyFormat } from "@/utils/currencyFormat"
-import type { IProduct } from "@/interfaces/product.interface"
-import type { IDataTableColumn } from "@/interfaces/app/table.interface"
-import type { IMetaModel } from "@/interfaces/app/metamodel.interface"
 import { ProductImage } from "@/components/product/product-image/ProductImage"
 
 

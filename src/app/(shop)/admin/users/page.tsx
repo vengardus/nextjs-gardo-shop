@@ -1,10 +1,8 @@
-import { PageNotFound } from "@/components/ui/not-found/PageNotFound";
-import { UsersList } from "@/components/admin/users/UsersList";
+import { getValidNumber } from "@/utils"
+import type { IUser } from "@/interfaces"
+import { getAllUsers } from "@/actions"
+import { PageNotFound, UsersList } from "@/components"
 
-import { getAllUsers } from "@/actions/user/get-all-users.action";
-
-import { getValidNumber } from "@/utils/getValidNumber";
-import type { IUser } from "@/interfaces/user.interface";
 
 interface Props {
     searchParams: {

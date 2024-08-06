@@ -1,22 +1,16 @@
 "use client"
 
 import { useState } from "react"
-
-import { HeaderTable } from "@/components/ui/table/HeaderTable"
-import { DataTable } from "@/components/ui/table/DataTable"
-import { ListTable } from "@/components/ui/table/ListTable"
+import { dataApp } from "@/config"
+import { setColumnHeader } from "@/utils"
+import { updateUserRole } from "@/actions"
+import type { IDataTableColumn, IMetaModel, IUser, UserRole } from "@/interfaces"
 import { Select } from "@/components/ui/select/Select"
+import { DataTable } from "@/components/ui/table/DataTable"
+import { HeaderTable } from "@/components/ui/table/HeaderTable"
+import { ListTable } from "@/components/ui/table/ListTable"
 import { MessageDatEmpty } from "@/components/ui/table/MessageDatEmpty"
 import { MessageError } from "@/components/ui/table/MessageError"
-
-import { updateUserRole } from "@/actions/user/update-user-role.action"
-
-import { dataApp } from "@/config/configApp"
-import { setColumnHeader } from "@/utils/setColumnHeader"
-import type { IUser, UserRole } from "@/interfaces/user.interface"
-import type { IDataTableColumn } from "@/interfaces/app/table.interface"
-import type { IMetaModel } from "@/interfaces/app/metamodel.interface"
-
 
 interface Props {
     data: IUser[]

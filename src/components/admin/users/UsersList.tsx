@@ -1,9 +1,9 @@
-import { Pagination } from '@/components/ui/pagination/Pagination';
-import { ListTableUser } from '@/components/admin/users/ListTableUser';
-import { ListHeader } from '@/components/ui/list-view/list-header/ListHeader';
+import { ListHeader } from "@/components/ui/list-view/list-header/ListHeader"
+import { APP_CONST } from "@/config"
+import { IUser } from "@/interfaces"
+import { ListTableUser } from "./ListTableUser"
+import { Pagination } from "@/components/ui/pagination/Pagination"
 
-import { APP_CONST } from '@/config/configApp';
-import type { IUser } from '@/interfaces/user.interface';
 
 interface Props {
     data: IUser[]

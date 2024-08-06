@@ -1,6 +1,6 @@
-import { toCapitalize } from "@/utils/toCapitalize"
+import { toCapitalize } from "@/utils"
+import type { IMetaModel } from "@/interfaces"
 import { Title } from "../../title/Title"
-import { IMetaModel } from "@/interfaces/app/metamodel.interface"
 
 interface Props {
     title?: string

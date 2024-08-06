@@ -1,17 +1,14 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
-
+import { dataApp } from "@/config";
+import type { Gender, IDataSelect, IProduct, Size } from "@/interfaces";
+import { createUpdateProduct, deleteProductImage } from "@/actions";
 import { Select } from "@/components/ui/select/Select";
-import { createUpdateProduct } from "@/actions/product/create-update-product";
-import { dataApp } from "@/config/configApp";
-import type { IDataSelect } from "@/interfaces/app/data-select.interface";
-import type { Gender, IProduct, Size } from "@/interfaces/product.interface";
 import { ProductImage } from "@/components/product/product-image/ProductImage";
-import { deleteProductImage } from "@/actions/product/delete-product-image";
+
 
 interface Props {
     product: IProduct | null;

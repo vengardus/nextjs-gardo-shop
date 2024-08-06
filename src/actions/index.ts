@@ -18,3 +18,6 @@ export * from "./product/delete-product-image"
 export * from "./product/get-all-products.action"
 export * from "./product/get-stock-by-slug"
 export * from "./product/product-by-slug"
+
+export * from "./user/get-all-users.action"
+export * from "./user/update-user-role.action"
