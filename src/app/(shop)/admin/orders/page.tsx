@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
 
-import { OrdersList } from "@/components/orders/OrdersList";
 
-import { getAllOrders } from "@/actions/order/get-all-orders.action";
+import { APP_CONST } from "@/config";
+import { getValidNumber } from "@/utils";
+import { IOrder } from "@/interfaces";
+import { getAllOrders } from "@/actions";
+import { OrdersList } from "@/components";
 
-import { getValidNumber } from "@/utils/getValidNumber";
-import { APP_CONST } from "@/config/configApp";
-import { IOrder } from "@/interfaces/order.interface";
 
 interface Props {
     searchParams: {

@@ -2,11 +2,10 @@
 
 import prisma from "@/lib/prisma";
 import { auth } from "@/auth";
-import { IResponseAction } from "@/interfaces/app/response.interface";
-import { getActionError } from "@/utils/getActionError";
-import { APP_CONST } from "@/config/configApp";
-import { initResponseAction } from "@/utils/initResponseAction";
-import { IPagination } from "@/interfaces/app/pagination.interface";
+import { APP_CONST } from "@/config";
+import { getActionError, initResponseAction } from "@/utils";
+import { IPagination, IResponseAction } from "@/interfaces";
+
 
 export const getAllOrders = async (
     applyPagination:boolean = false,
