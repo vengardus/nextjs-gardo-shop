@@ -10,6 +10,7 @@ interface Props {
     orderId: string
 }
 
+
 export const PaypalButton = ({ amount, orderId }: Props) => {
     const [{ isPending }] = usePayPalScriptReducer();
     const roundAmount = Math.round(amount * 100) / 100 
