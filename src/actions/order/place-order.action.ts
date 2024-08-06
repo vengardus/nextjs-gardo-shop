@@ -2,11 +2,9 @@
 
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
-import { APP_CONST } from "@/config/configApp";
-import type { IAddress } from "@/interfaces/address.interface";
-import type { Size } from "@/interfaces/product.interface";
-import type { IResponseAction } from "@/interfaces/app/response.interface";
-import { initResponseAction } from "@/utils/initResponseAction";
+import { APP_CONST } from "@/config";
+import { initResponseAction } from "@/utils";
+import type { IAddress, IResponseAction, Size } from "@/interfaces";
 
 export interface IProductToOrder {
     product_id: string;

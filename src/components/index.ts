@@ -12,6 +12,10 @@ export * from "./cart/CartItems"
 export * from "./cart/ui/CartSumary"
 export * from "./cart/ui/ItemsInCart"
 
+export * from "./checkout/(checkout)/CheckOutItems"
+export * from "./checkout/(checkout)/CheckOutResumen"
+export * from "./checkout/address/ui/AddressForm"
+
 export * from "./order/OrderItems"
 export * from "./order/OrderPaidMessage"
 export * from "./order/OrderResumen"

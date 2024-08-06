@@ -1,13 +1,13 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import clsx from "clsx"
-import { useAddressStore } from "@/store/address/address.store"
-import { useCartStore } from "@/store/cart/cart.store"
-import { currencyFormat } from "@/utils/currencyFormat"
-import { type IProductToOrder, placeOrder } from "@/actions/order/place-order.action"
 import { useRouter } from "next/navigation"
-import { APP_CONST } from "@/config/configApp"
+import clsx from "clsx"
+import { APP_CONST } from "@/config"
+import { currencyFormat } from "@/utils"
+import type { IProductToOrder } from "@/interfaces"
+import { useAddressStore, useCartStore } from "@/store"
+import { placeOrder } from "@/actions"
 
 
 export const CheckOutResumen = () => {

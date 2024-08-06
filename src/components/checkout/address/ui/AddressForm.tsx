@@ -1,13 +1,12 @@
 "use client"
 import { useEffect } from "react"
-import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
+import { useRouter } from "next/navigation"
 import clsx from "clsx"
-import { deleteUserAddress } from "@/actions/address/delete-user-address.action"
-import { setUserAddress } from "@/actions/address/set-user-address.action"
-import type { IAddress } from "@/interfaces/address.interface"
-import type { ICountry } from "@/interfaces/country.interface"
-import { useAddressStore } from "@/store/address/address.store"
+import type { IAddress, ICountry } from "@/interfaces"
+import { useAddressStore } from "@/store"
+import { deleteUserAddress, setUserAddress } from "@/actions"
+
 
 interface IFormInputs extends IAddress {
     rememberAddress: boolean
