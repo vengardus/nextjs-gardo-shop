@@ -1,10 +1,10 @@
 "use server";
 
-import { IResponseAction } from "@/interfaces/app/response.interface";
 import prisma from "@/lib/prisma";
-import { getActionError } from "@/utils/getActionError";
-import { initResponseAction } from "@/utils/initResponseAction";
-import bcryptjs from "bcryptjs";
+import { cryptoHashSync } from "@/lib";
+import { getActionError, initResponseAction } from "@/utils";
+import { IResponseAction } from "@/interfaces";
+
 
 export const registerUser = async (
     name: string,
@@ -18,7 +18,7 @@ export const registerUser = async (
             data: {
                 name,
                 email: email.toLowerCase(),
-                password: bcryptjs.hashSync(password),
+                password: cryptoHashSync(password),
             },
             select: {
                 id:true,

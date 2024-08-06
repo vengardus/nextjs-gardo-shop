@@ -1,11 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
 import { useForm } from "react-hook-form"
+import Link from "next/link"
 import clsx from "clsx"
-import { registerUser } from "@/actions/auth/register.action"
-import { login } from "@/actions/auth/login.action"
+import { login, registerUser } from "@/actions"
+
 
 
 type FormInputs = {
