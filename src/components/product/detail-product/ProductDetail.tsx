@@ -1,11 +1,8 @@
-import { SizeSelector } from "../size-selector/SizeSelector"
-import { QuantitySelector } from "../quantity-selector/QuantitySelector"
-import { titleFont } from "@/config/fonts"
-import { IProduct } from "@/interfaces/product.interface"
+import { titleFont } from "@/config"
+import { currencyFormat } from "@/utils"
+import { IProduct } from "@/interfaces"
 import { StockLabel } from "../stock-label/StockLabel"
 import { AddToCart } from "../ui/AddToCart"
-import { currencyFormat } from "@/utils/currencyFormat"
-
 
 interface Props {
     product: IProduct,

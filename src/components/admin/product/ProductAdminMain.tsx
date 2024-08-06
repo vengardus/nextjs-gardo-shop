@@ -10,7 +10,7 @@ interface Props {
     }
 }
 
-export const ProductMain = async ({ slug, data }: Props) => {
+export const ProductAdminMain = async ({ slug, data }: Props) => {
 
     return (
         <>

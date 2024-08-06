@@ -1,10 +1,11 @@
 "use client"
 
-import type { ICartProduct, IProduct, Size } from "@/interfaces/product.interface"
+import { useState } from "react"
+import type { ICartProduct, IProduct, Size } from "@/interfaces"
+import { useCartStore } from "@/store"
 import { QuantitySelector } from "../quantity-selector/QuantitySelector"
 import { SizeSelector } from "../size-selector/SizeSelector"
-import { useState } from "react"
-import { useCartStore } from "@/store/cart/cart.store"
+
 
 interface Props {
     product: IProduct

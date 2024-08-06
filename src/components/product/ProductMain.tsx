@@ -1,7 +1,8 @@
-import { ProductDetail } from "@/components/product/detail-product/ProductDetail"
-import { ProductMobileSlideShow } from "@/components/product/slide-show/ProductMobileSlideShow"
-import { ProductSlideShow } from "@/components/product/slide-show/ProductSlideShow"
-import { IProduct } from "@/interfaces/product.interface"
+import type { IProduct } from "@/interfaces"
+import { ProductMobileSlideShow } from "./slide-show/ProductMobileSlideShow"
+import { ProductSlideShow } from "./slide-show/ProductSlideShow"
+import { ProductDetail } from "./detail-product/ProductDetail"
+
 
 interface Props {
   product: IProduct,

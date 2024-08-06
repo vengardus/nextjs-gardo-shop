@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation"
-import { ProductMain } from "@/components"
+import { ProductAdminMain} from "@/components"
 import type { ICategory, IDataSelect, IProduct } from "@/interfaces"
 import { getAllCategory, getProductBySlug } from "@/actions"
 
@@ -34,7 +34,7 @@ export default async function AdminProductPage({ params }: Props) {
 
 
     return (
-        <ProductMain 
+        <ProductAdminMain 
             slug={slug}
             data={{
                 product,

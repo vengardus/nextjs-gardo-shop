@@ -2,10 +2,11 @@ export const revalidate = 604800  // 7 dias aprox
 
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import type { IProduct } from '@/interfaces'
+import { getProductBySlug } from '@/actions'
+import { ProductMain } from '@/components'
 
-import { ProductMain } from '@/components/product/ProductMain'
-import { getProductBySlug } from '@/actions/product/product-by-slug'
-import { IProduct } from '@/interfaces/product.interface'
+
 
 interface Props {
     params: {

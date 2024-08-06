@@ -1,4 +1,4 @@
-export * from "./admin/product/ProductMain"
+export * from "./admin/product/ProductAdminMain"
 export * from "./admin/products/ProductsList"
 export * from "./admin/users/ListTableUser"
 export * from "./admin/users/UsersList"
@@ -23,6 +23,7 @@ export * from "./order/OrderResumen"
 export * from "./orders/ListTableOrder"
 export * from "./orders/OrdersList"
 
+export * from "./product/ProductMain"
 export * from "./product/detail-product/ProductDetail"
 export * from "./product/product-image/ProductImage"
 export * from "./product/quantity-selector/QuantitySelector"
