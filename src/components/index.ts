@@ -23,6 +23,16 @@ export * from "./order/OrderResumen"
 export * from "./orders/ListTableOrder"
 export * from "./orders/OrdersList"
 
+export * from "./product/detail-product/ProductDetail"
+export * from "./product/product-image/ProductImage"
+export * from "./product/quantity-selector/QuantitySelector"
+export * from "./product/size-selector/SizeSelector"
+export * from "./product/slide-show/ProductMobileSlideShow"
+export * from "./product/slide-show/ProductSlideShow"
+export * from "./product/stock-label/StockLabel"
+export * from "./product/ui/AddToCart"
+
+export * from "./products/ProductList"
 
 export * from "./ui/footer/Footer"
 export * from "./ui/list-view/list-header/ListHeader"

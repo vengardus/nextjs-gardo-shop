@@ -1,11 +1,12 @@
 "use client"
 import { useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
-import { IProduct } from "@/interfaces/product.interface"
-import { currencyFormat } from "@/utils/currencyFormat"
+
+
+import { currencyFormat } from "@/utils"
+import type { IProduct } from "@/interfaces"
 import { ProductImage } from "@/components/product/product-image/ProductImage"
-import { APP_CONST, dataApp } from "@/config/configApp"
+
 
 interface Props {
     product: IProduct

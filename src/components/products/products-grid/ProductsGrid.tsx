@@ -1,4 +1,4 @@
-import { type IProduct } from "@/interfaces/product.interface"
+import type { IProduct } from "@/interfaces"
 import { ProductsGridItem } from "./ProductsGridItem"
 
 interface Props {

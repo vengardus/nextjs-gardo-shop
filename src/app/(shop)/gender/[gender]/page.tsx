@@ -1,15 +1,10 @@
 export const revalidate = 60  // 60 segundos
 
 import { notFound, redirect } from "next/navigation"
-
-import { ProductList } from "@/components/products/ProductList"
-
-import { getAllProductsWithImages } from "@/actions/product/get-all-products.action"
-
-import { isValidGender } from "@/utils/isValidGender"
-import { getValidNumber } from "@/utils/getValidNumber"
-import type { IProduct } from "@/interfaces/product.interface"
-
+import { getValidNumber, isValidGender } from "@/utils"
+import type { IProduct } from "@/interfaces"
+import { getAllProductsWithImages } from "@/actions"
+import { ProductList } from "@/components"
 
 interface Props {
   params: {

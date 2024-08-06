@@ -1,8 +1,9 @@
-import { Gender, type IProduct } from "@/interfaces/product.interface"
-import { ProductsGrid } from "@/components/products/products-grid/ProductsGrid"
-import { Title } from "@/components/ui/title/Title"
-import { Pagination } from "@/components/ui/pagination/Pagination"
-import { labelGender } from "@/config/configApp"
+import { labelGender } from "@/config"
+import { Gender, IProduct } from "@/interfaces"
+import { Title } from "../ui/title/Title"
+import { Pagination } from "../ui/pagination/Pagination"
+import { ProductsGrid } from "./products-grid/ProductsGrid"
+
 
 interface Props {
   products: IProduct[],
