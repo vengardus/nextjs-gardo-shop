@@ -7,6 +7,11 @@ export * from "./auth/login/LoginForm"
 export * from "./auth/login/LoginButton"
 export * from "./auth/new-account/RegisterForm"
 
+export * from "./cart/CartCheckout"
+export * from "./cart/CartItems"
+export * from "./cart/ui/CartSumary"
+export * from "./cart/ui/ItemsInCart"
+
 export * from "./order/OrderItems"
 export * from "./order/OrderPaidMessage"
 export * from "./order/OrderResumen"

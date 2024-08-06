@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useCartStore } from "@/store/cart/cart.store"
-import { currencyFormat } from "@/utils/currencyFormat"
-import { APP_CONST } from "@/config/configApp"
+import { currencyFormat } from "@/utils"
+import { APP_CONST } from "@/config"
+import { useCartStore } from "@/store"
 
 
 export const CartSumary = () => {

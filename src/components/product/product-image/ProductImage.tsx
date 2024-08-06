@@ -1,5 +1,5 @@
-import { dataApp } from "@/config/configApp"
 import Image from "next/image"
+import { dataApp } from "@/config"
 
 interface Props {
     src?: string
