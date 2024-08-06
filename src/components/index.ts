@@ -24,14 +24,6 @@ export * from "./orders/ListTableOrder"
 export * from "./orders/OrdersList"
 
 export * from "./product/ProductMain"
-export * from "./product/detail-product/ProductDetail"
-export * from "./product/product-image/ProductImage"
-export * from "./product/quantity-selector/QuantitySelector"
-export * from "./product/size-selector/SizeSelector"
-export * from "./product/slide-show/ProductMobileSlideShow"
-export * from "./product/slide-show/ProductSlideShow"
-export * from "./product/stock-label/StockLabel"
-export * from "./product/ui/AddToCart"
 
 export * from "./products/ProductList"
 
