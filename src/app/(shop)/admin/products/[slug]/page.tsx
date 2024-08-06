@@ -1,10 +1,8 @@
-import { getAllCategory } from "@/actions/category/get-all-category"
-import { getProductBySlug } from "@/actions/product/product-by-slug"
-import { ProductMain } from "@/components/admin/product/ProductMain"
-import { IDataSelect } from "@/interfaces/app/data-select.interface"
-import { ICategory } from "@/interfaces/category.interface"
-import { IProduct } from "@/interfaces/product.interface"
 import { redirect } from "next/navigation"
+import type { ICategory, IDataSelect, IProduct } from "@/interfaces"
+import { getAllCategory, getProductBySlug } from "@/actions"
+import { ProductMain } from "@/components"
+
 
 interface Props {
     params: {

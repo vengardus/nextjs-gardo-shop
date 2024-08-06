@@ -1,3 +1,8 @@
+export * from "./admin/product/ProductMain"
+export * from "./admin/products/ProductsList"
+export * from "./admin/users/ListTableUser"
+export * from "./admin/users/UsersList"
+
 export * from "./auth/login/LoginForm"
 export * from "./auth/login/LoginButton"
 export * from "./auth/new-account/RegisterForm"
@@ -8,3 +13,18 @@ export * from "./order/OrderResumen"
 
 export * from "./orders/ListTableOrder"
 export * from "./orders/OrdersList"
+
+
+export * from "./ui/footer/Footer"
+export * from "./ui/list-view/list-header/ListHeader"
+export * from "./ui/not-found/PageNotFound"
+export * from "./ui/pagination/Pagination"
+export * from "./ui/select/Select"
+export * from "./ui/sidebar/Sidebar"
+export * from "./ui/table/DataTable"
+export * from "./ui/table/HeaderTable"
+export * from "./ui/table/ListTable"
+export * from "./ui/table/MessageDatEmpty"
+export * from "./ui/table/MessageError"
+export * from "./ui/title/Title"
+export * from "./ui/top-menu/TopMenu"

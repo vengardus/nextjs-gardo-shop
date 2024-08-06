@@ -1,10 +1,7 @@
-import { PageNotFound } from "@/components/ui/not-found/PageNotFound";
-import { ProductsList } from "@/components/admin/products/ProductsList";
-
-import { getAllProductsWithImages } from "@/actions/product/get-all-products.action";
-
-import { getValidNumber } from "@/utils/getValidNumber";
-import { IProduct } from "@/interfaces/product.interface";
+import { getValidNumber } from "@/utils";
+import { getAllProductsWithImages } from "@/actions";
+import type { IProduct } from "@/interfaces";
+import { PageNotFound, ProductsList } from "@/components";
 
 interface Props {
     searchParams: {
